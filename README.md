@@ -1,10 +1,29 @@
 <div align="center">
-  <h2><b> (AAAI'25) TimeCMA: Towards LLM-Empowered Multivariate Time Series Forecasting via Cross-Modality Alignment </b></h2>
+  <h2><b> TS-CVA: Time Series Forecasting via Cross-modal Variable Alignment </b></h2>
 </div>
 
-This repository contains the code for our AAAI 2025 [paper](https://arxiv.org/abs/2406.01638), where we porpose an intuitive yet effective framework for MTSF via cross-modality alignment.
+This repository contains **TS-CVA** (Time Series - Cross-modal Variable Alignment), an advanced framework for multivariate time series forecasting that extends the TimeCMA approach with dual-modality learning.
 
-> If you find our work useful in your research. Please consider giving a star ⭐ and citation 📚:
+## Overview
+
+TS-CVA enhances time series forecasting by integrating two complementary modalities:
+
+- **Vector Modality**: Pure time series feature extraction using contrastive learning methods (TS2Vec)
+- **Context Modality**: LLM-empowered encoding with external knowledge and real-time information
+
+This dual-modality approach is particularly effective for **stock market prediction**, where both historical price patterns and external events (news, sentiment, macroeconomic indicators) play crucial roles.
+
+### Key Features
+
+- Cross-modal alignment between vector and context representations
+- Integration of external real-time information sources
+- Pre-computed embedding storage for efficient inference
+- Extensible architecture for various forecasting domains
+- Built upon TimeCMA (AAAI 2025) foundation
+
+### Based on TimeCMA
+
+This project extends the TimeCMA framework:
 
 ```bibtex
 @inproceedings{liu2024timecma,
@@ -15,12 +34,15 @@ This repository contains the code for our AAAI 2025 [paper](https://arxiv.org/ab
 }
 ```
 
-## Abstract
-Multivariate time series forecasting (MTSF) aims to learn temporal dynamics among variables to forecast future time series. Existing statistical and deep learning-based methods suffer from limited learnable parameters and small-scale training data. Recently, large language models (LLMs) combining time series with textual prompts have achieved promising performance in MTSF. However, we discovered that current LLM-based solutions fall short in learning *disentangled* embeddings. We introduce TimeCMA, an intuitive yet effective framework for MTSF via cross-modality alignment. Specifically, we present a dual-modality encoding with two branches: the time series encoding branch extracts *disentangled yet weak* time series embeddings, and the LLM-empowered encoding branch wraps the same time series with text as prompts to obtain *entangled yet robust* prompt embeddings. As a result, such a cross-modality alignment retrieves *both disentangled and robust* time series embeddings, ``the best of two worlds'', from the prompt embeddings based on time series and prompt modality similarities. As another key design, to reduce the computational costs from time series with their length textual prompts, we design an effective prompt to encourage the most essential temporal information to be encapsulated in the last token: only the last token is passed to downstream prediction. We further store the last token embeddings to accelerate inference speed. Extensive experiments on eight real datasets demonstrate that TimeCMA outperforms state-of-the-arts.
+## Architecture
 
-<p align="center">
-  <img width="900" alt="image" src="https://github.com/user-attachments/assets/f7359297-5781-4f09-b7b6-aa82f0df817d" />
-</p>
+TS-CVA implements a triple-modality architecture:
+
+1. **Time Series Branch**: Extracts temporal patterns from raw time series data
+2. **Vector Modality Branch**: Learns robust representations via contrastive learning
+3. **Context Modality Branch**: Incorporates LLM-encoded external knowledge
+
+The cross-modal alignment mechanism retrieves complementary information from both modalities, combining the strengths of pure time series learning and context-aware prediction.
 
 ## Dependencies
 
@@ -49,5 +71,10 @@ bash Store_{data_name}.sh
 bash {data_name}.sh
 ```
 
-## Contact Us
-For inquiries or further assistance, contact us at [chenxi.liu@ntu.edu.sg](mailto:chenxi.liu@ntu.edu.sg).
+## License
+
+This project is based on TimeCMA, which uses the S-Lab License 1.0. See [LICENSE.txt](LICENSE.txt) for details.
+
+## Acknowledgments
+
+We acknowledge the original TimeCMA authors for their foundational work in LLM-empowered time series forecasting. This project extends their framework with additional modalities for enhanced prediction capabilities.
