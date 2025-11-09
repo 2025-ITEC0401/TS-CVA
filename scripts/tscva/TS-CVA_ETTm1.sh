@@ -4,7 +4,12 @@
 
 export PYTHONPATH=/path/to/project_root:$PYTHONPATH
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-export CUDA_VISIBLE_DEVICES=0
+
+# Auto-select free GPU
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FREE_GPU=$(bash ${SCRIPT_DIR}/../utils/find_free_gpu.sh)
+export CUDA_VISIBLE_DEVICES=${FREE_GPU}
+echo "Using GPU: ${FREE_GPU}"
 
 data_path="ETTm1"
 seq_len=96
