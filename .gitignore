@@ -1,0 +1,44 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Data
+dataset/*
+!dataset/.gitkeep
+!dataset/Epilepsy/
+Embeddings/*
+!Embeddings/.gitkeep
+
+# Logs
+logs/*/*.log
+*.log
+Results/*/*.log
+Results_clustering/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Conda
+*.yaml.lock
+
+# Temporary files
+/tmp/
+*.tmp
+
+# Model checkpoints
+*.pth
+*.pt
+best_model.pth
