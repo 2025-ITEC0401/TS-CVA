@@ -58,18 +58,70 @@ The cross-modal alignment mechanism retrieves complementary information from bot
 ## Datasets
 Datasets can be obtained from [TimesNet](https://drive.google.com/drive/folders/13Cg1KYOlzM5C7K8gK8NfC-F3EYxkM3D2) and [TFB](https://drive.google.com/file/d/1vgpOmAygokoUt235piWKUjfwao6KwLv7/view).
 
-## Usages
-* ### Last token embedding storage
+## Quick Start
 
+### 1. Environment Setup
 ```bash
-bash Store_{data_name}.sh
+# Create conda environment
+conda env create -f env.yaml
+
+# Activate environment
+conda activate TS-CVA
 ```
 
-* ### Train and inference
-   
+### 2. Prepare LLM Embeddings
 ```bash
-bash {data_name}.sh
+# Generate and store last token embeddings for faster training
+bash scripts/Store_ETT.sh
 ```
+
+### 3. Training Options
+
+#### Option A: Train TS-CVA (Recommended)
+Multi-task learning with contrastive and forecasting losses:
+```bash
+# Train TS-CVA on ETTm1
+bash scripts/TS-CVA_ETTm1.sh
+```
+
+#### Option B: Two-Stage Training
+For better performance, pre-train TS2Vec encoder first:
+```bash
+# Stage 1: Pre-train TS2Vec encoder
+bash scripts/Pretrain_TS2Vec.sh
+
+# Stage 2: Fine-tune end-to-end
+python train_tscva.py \
+  --data_path ETTm1 \
+  --pred_len 96 \
+  --load_pretrain ./checkpoints/ts2vec_pretrain/ETTm1/best_ts2vec_encoder.pth
+```
+
+#### Option C: Train Baseline (TimeCMA)
+```bash
+# Original TimeCMA model
+bash scripts/ETTm1.sh
+```
+
+### 4. Custom Training
+```bash
+python train_tscva.py \
+  --data_path ETTm1 \
+  --seq_len 96 \
+  --pred_len 96 \
+  --batch_size 128 \
+  --contrastive_weight 0.3 \
+  --forecast_weight 0.7 \
+  --use_augmentation \
+  --use_triple_align \
+  --fusion_mode gated
+```
+
+## Training Scripts
+
+- `train_tscva.py`: Main TS-CVA training with multi-task learning
+- `pretrain_ts2vec.py`: TS2Vec encoder pre-training
+- `train.py`: Original TimeCMA baseline training
 
 ## License
 
