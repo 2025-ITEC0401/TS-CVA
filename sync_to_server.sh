@@ -54,6 +54,9 @@ logs/*/*.log
 .idea/
 venv/
 env/
+dataset/
+Embeddings/
+Results/
 EOF
 
 echo -e "${BLUE}Files to sync:${NC}"

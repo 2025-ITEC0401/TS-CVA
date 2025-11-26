@@ -204,8 +204,11 @@ class TS_CVA(nn.Module):
         # === 2. Vector Modality Branch (TS2Vec) ===
         vector_repr = self.vector_encoder(input_data_norm)  # [B, C_vec, L]
 
-        # Transpose for alignment: [B, L, C_vec]
-        vector_repr_T = vector_repr.transpose(1, 2)
+        # Adaptive pooling to match num_nodes for alignment: [B, C_vec, N]
+        vector_repr_pooled = F.adaptive_avg_pool1d(vector_repr, self.num_nodes)
+
+        # Transpose for alignment: [B, N, C_vec]
+        vector_repr_T = vector_repr_pooled.transpose(1, 2)
 
         # === 3. Context Modality Branch (LLM) ===
         embeddings = embeddings.squeeze(-1)  # [B, E, N]

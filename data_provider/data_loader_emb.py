@@ -10,7 +10,7 @@ import h5py
 warnings.filterwarnings('ignore')
 
 class Dataset_ETT_hour(Dataset):
-    def __init__(self, root_path="/mnt/sfs-common/dataset/", flag='train', size=None, 
+    def __init__(self, root_path="./dataset/", flag='train', size=None,
                  features='M', data_path='ETTh1', num_nodes=7,
                  target='OT', scale=True, inverse=False, timeenc=0, freq='h',
                  model_name="gpt2"):
@@ -47,14 +47,13 @@ class Dataset_ETT_hour(Dataset):
         self.data_path_file = data_path_file
 
         self.model_name = model_name
-        self.embed_path = f"/mnt/sfs-common/TimeCMA/Embeddings/{data_path_file}/{flag}/"
+        self.embed_path = f"./Embeddings/{data_path_file}/{flag}/"
 
         self.__read_data__()
 
     def __read_data__(self):
         self.scaler = StandardScaler()
-        df_raw = pd.read_csv(os.path.join(self.root_path,
-                                          self.data_path))
+        df_raw = pd.read_csv(self.data_path)
 
         border1s = [0, 12*30*24 - self.seq_len, 12*30*24+4*30*24 - self.seq_len]
         border2s = [12*30*24, 12*30*24+4*30*24, 12*30*24+8*30*24]
@@ -128,7 +127,7 @@ class Dataset_ETT_hour(Dataset):
         return self.scaler.inverse_transform(data)
    
 class Dataset_ETT_minute(Dataset):
-    def __init__(self, root_path="/mnt/sfs-common/dataset/", flag='train', size=None, 
+    def __init__(self, root_path="./dataset/", flag='train', size=None, 
                  features='M', data_path='ETTm1', model_name="gpt2",
                  target='OT', scale=True, inverse=False, timeenc=0, freq='t', cols=None):
         # size [seq_len, label_len, pred_len]
@@ -163,14 +162,13 @@ class Dataset_ETT_minute(Dataset):
         self.data_path_file = data_path_file
 
         self.model_name = model_name
-        self.embed_path = f"/mnt/sfs-common/TimeCMA/Embeddings/{data_path_file}/{flag}/"
+        self.embed_path = f"./Embeddings/{data_path_file}/{flag}/"
 
         self.__read_data__()
 
     def __read_data__(self):
         self.scaler = StandardScaler()
-        df_raw = pd.read_csv(os.path.join(self.root_path,
-                                          self.data_path))
+        df_raw = pd.read_csv(self.data_path)
 
         border1s = [0, 12*30*24*4 - self.seq_len, 12*30*24*4+4*30*24*4 - self.seq_len]
         border2s = [12*30*24*4, 12*30*24*4+4*30*24*4, 12*30*24*4+8*30*24*4]
@@ -242,7 +240,7 @@ class Dataset_ETT_minute(Dataset):
         return self.scaler.inverse_transform(data)
 
 class Dataset_Custom(Dataset):
-    def __init__(self, root_path="/mnt/sfs-common/dataset/", flag='train', size=None,
+    def __init__(self, root_path="./dataset/", flag='train', size=None,
                  features='M', data_path='ECL',
                  target='OT', scale=True, timeenc=0, freq='h',
                  patch_len=16,percent=100,model_name="gpt2"):
@@ -279,14 +277,13 @@ class Dataset_Custom(Dataset):
         self.data_path_file = data_path_file
 
         self.model_name = model_name
-        self.embed_path = f"/mnt/sfs-common/TimeCMA/Embeddings/{data_path_file}/{flag}/"
+        self.embed_path = f"./Embeddings/{data_path_file}/{flag}/"
 
         self.__read_data__()
 
     def __read_data__(self):
         self.scaler = StandardScaler()
-        df_raw = pd.read_csv(os.path.join(self.root_path,
-                                          self.data_path))
+        df_raw = pd.read_csv(self.data_path)
 
         '''
         df_raw.columns: ['date', ...(other features), target feature]
