@@ -1,346 +1,316 @@
+"""
+TS-CVA Training Script
+
+Usage:
+    python train.py <dataset> <run_name> --loader UEA --epochs 100 --eval
+    
+Example:
+    python train.py BasicMotions ts_cva_exp --loader UEA --epochs 100 --gpu 0 --eval
+"""
+
 import torch
-from torch import optim
 import numpy as np
 import argparse
-import time
 import os
-import random
-from torch.utils.data import DataLoader
-from data_provider.data_loader_emb import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom
-from models.TimeCMA import Dual
-from utils.metrics import MSE, MAE, metric
-import faulthandler
-faulthandler.enable()
-torch.cuda.empty_cache()
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:150"
+import sys
+import time
+import datetime
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--device", type=str, default="cuda", help="")
-    parser.add_argument("--data_path", type=str, default="ETTm1", help="data path")
-    parser.add_argument("--channel", type=int, default=32, help="number of features")
-    parser.add_argument("--num_nodes", type=int, default=7, help="number of nodes")
-    parser.add_argument("--seq_len", type=int, default=96, help="seq_len")
-    parser.add_argument("--pred_len", type=int, default=96, help="out_len")
-    parser.add_argument("--batch_size", type=int, default=128, help="batch size")
-    parser.add_argument("--learning_rate", type=float, default=1e-4, help="learning rate")
-    parser.add_argument("--dropout_n", type=float, default=0.2, help="dropout rate of neural network layers")
-    parser.add_argument("--d_llm", type=int, default=768, help="hidden dimensions")
-    parser.add_argument("--e_layer", type=int, default=1, help="layers of transformer encoder")
-    parser.add_argument("--d_layer", type=int, default=1, help="layers of transformer decoder")
-    parser.add_argument("--head", type=int, default=8, help="heads of attention")
-    parser.add_argument("--weight_decay", type=float, default=1e-3, help="weight decay rate")
-    parser.add_argument("--num_workers", type=int, default=10)
-    parser.add_argument("--model_name", type=str, default="gpt2", help="llm")
-    parser.add_argument("--epochs", type=int, default=100, help="")
-    parser.add_argument('--seed', type=int, default=2024, help='random seed')
-    parser.add_argument(
-        "--es_patience",
-        type=int,
-        default=50,
-        help="quit if no improvement after this many iterations",
-    )
-    parser.add_argument(
-        "--save",
-        type=str,
-        default="./logs/" + str(time.strftime("%Y-%m-%d-%H:%M:%S")) + "-",
-        help="save path",
-    )
-    return parser.parse_args()
+from ts_cva import TSCVAWrapper
+import datautils
+import tasks
+from utils import init_dl_program, name_with_datetime, pkl_save, data_dropout, string_save, list_save
+from visualization import plot_loss_curves
 
-class trainer:
-    def __init__(
-        self,
-        scaler,
-        channel,
-        num_nodes,
-        seq_len,
-        pred_len,
-        dropout_n,
-        d_llm,
-        e_layer,
-        d_layer,
-        head,
-        lrate,
-        wdecay,
-        device,
-        epochs
-    ):
-        self.model = Dual(
-            device=device, channel=channel, num_nodes=num_nodes, seq_len=seq_len, pred_len=pred_len, 
-            dropout_n=dropout_n, d_llm=d_llm, e_layer=e_layer, d_layer=d_layer, head=head
-        )
-        
-        self.optimizer = optim.AdamW(self.model.parameters(), lr=lrate, weight_decay=wdecay)
-        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, T_max=min(epochs, 50), eta_min=1e-6)
-        self.loss = MSE
-        self.MAE = MAE
-        self.clip = 5
-        print("The number of trainable parameters: {}".format(self.model.count_trainable_params()))
-        print("The number of parameters: {}".format(self.model.param_num()))
-        # print(self.model)
 
-    def train(self, input, mark, embeddings, real):
-        self.model.train()
-        self.optimizer.zero_grad()
-        predict = self.model(input, mark, embeddings)
-        loss = self.loss(predict, real)
-        loss.backward()
-        if self.clip is not None:
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.clip)
-        self.optimizer.step()
-        mae = self.MAE(predict, real)
-        return loss.item(), mae.item()
+class DualOutput:
+    """Redirect stdout to both terminal and file."""
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+        self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+
+class DualErrorOutput:
+    """Redirect stderr to both terminal and file."""
+    def __init__(self, filename):
+        self.terminal = sys.stderr
+        self.log = open(filename, "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+        self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+
+def save_checkpoint_callback(save_every=1, unit='epoch'):
+    """Create callback to save checkpoints."""
+    assert unit in ('epoch', 'iter')
+    def callback(model, loss, val_loss=None):
+        n = model.n_epochs if unit == 'epoch' else model.n_iters
+        if n % save_every == 0:
+            model.save(f'{run_dir}/model_{n}.pkl')
+    return callback
+
+
+def save_best_model_callback(monitor='val_loss', mode='min'):
+    """Create callback to save best model."""
+    best_value = None
+    best_epoch = None
     
-    def eval(self, input, mark, embeddings, real_val):
-        self.model.eval()
-        with torch.no_grad():
-            predict = self.model(input,mark, embeddings)
-        loss = self.loss(predict, real_val)
-        mae = self.MAE(predict, real_val)
-        return loss.item(), mae.item()
-
-def load_data(args):
-    data_map = {
-        'ETTh1': Dataset_ETT_hour,
-        'ETTh2': Dataset_ETT_hour,
-        'ETTm1': Dataset_ETT_minute,
-        'ETTm2': Dataset_ETT_minute
-    }
-    data_class = data_map.get(args.data_path, Dataset_Custom)
-    train_set = data_class(flag='train', scale=True, size=[args.seq_len, 0, args.pred_len], data_path=args.data_path)
-    val_set = data_class(flag='val', scale=True, size=[args.seq_len, 0, args.pred_len], data_path=args.data_path)
-    test_set = data_class(flag='test', scale=True, size=[args.seq_len, 0, args.pred_len], data_path=args.data_path)
-
-    scaler = train_set.scaler
-
-    train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=False, drop_last=True, num_workers=args.num_workers)
-    val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=False, drop_last=True, num_workers=args.num_workers)
-    test_loader = DataLoader(test_set, batch_size=args.batch_size, shuffle=False, drop_last=True, num_workers=args.num_workers)
-
-    # return train_loader, val_loader, test_loader, scaler
-    return train_set, val_set, test_set, train_loader, val_loader, test_loader, scaler
-
-def seed_it(seed):
-    random.seed(seed)
-    os.environ["PYTHONSEED"] = str(seed)
-    np.random.seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.enabled = True
-    torch.manual_seed(seed)
-
-def main():
-    args = parse_args()
-    train_set, val_set, test_set, train_loader, val_loader, test_loader,scaler = load_data(args)
-
-    print()
-    seed_it(args.seed)
-    # device = torch.device(args.device)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    
-    loss = 9999999
-    test_log = 999999
-    epochs_since_best_mse = 0
-
-    path = os.path.join(args.save, args.data_path, 
-                        f"{args.pred_len}_{args.channel}_{args.e_layer}_{args.d_layer}_{args.learning_rate}_{args.dropout_n}_{args.seed}/")
-    if not os.path.exists(path):
-        os.makedirs(path)
-     
-    his_loss = []
-    val_time = []
-    train_time = []
-    print(args)
-
-    engine = trainer(
-        scaler=scaler,
-        channel=args.channel,
-        num_nodes=args.num_nodes,
-        seq_len=args.seq_len,
-        pred_len=args.pred_len,
-        dropout_n=args.dropout_n,
-        d_llm=args.d_llm,
-        e_layer=args.e_layer,
-        d_layer=args.d_layer,
-        head=args.head,
-        lrate=args.learning_rate,
-        wdecay=args.weight_decay,
-        device=device,
-        epochs=args.epochs
-    )
-
-    print("Start training...", flush=True)
-
-    for i in range(1, args.epochs + 1):
-        t1 = time.time()
-        train_loss = []
-        train_mae = []
+    def callback(model, loss, val_loss=None):
+        nonlocal best_value, best_epoch
+        current_value = val_loss if monitor == 'val_loss' and val_loss is not None else loss
         
-        for iter, (x,y,x_mark,y_mark, embeddings) in enumerate(train_loader):
-            trainx = torch.Tensor(x).to(device) # [B, L, N]
-            trainy = torch.Tensor(y).to(device)
-            trainx_mark = torch.Tensor(x_mark).to(device) 
-            train_embedding = torch.Tensor(embeddings).to(device)
-            metrics = engine.train(trainx, trainx_mark, train_embedding, trainy)
-            train_loss.append(metrics[0])
-            train_mae.append(metrics[1])
+        if best_value is None or \
+           (mode == 'min' and current_value < best_value) or \
+           (mode == 'max' and current_value > best_value):
+            best_value = current_value
+            best_epoch = model.n_epochs
+            model.save(f'{run_dir}/model_best.pkl')
+    
+    return callback
 
-        t2 = time.time()
-        log = "Epoch: {:03d}, Training Time: {:.4f} secs"
-        print(log.format(i, (t2 - t1)))
-        train_time.append(t2 - t1)
 
-        # validation
-        val_loss = []
-        val_mae = []
-        s1 = time.time()
-
-        for iter, (x,y,x_mark,y_mark, embeddings) in enumerate(val_loader):
-            valx = torch.Tensor(x).to(device)
-            valy = torch.Tensor(y).to(device)
-            valx_mark = torch.Tensor(x_mark).to(device)
-            val_embedding = torch.Tensor(embeddings).to(device)
-            metrics = engine.eval(valx, valx_mark, val_embedding, valy)
-            val_loss.append(metrics[0])
-            val_mae.append(metrics[1])
-
-        s2 = time.time()
-        log = "Epoch: {:03d}, Validation Time: {:.4f} secs"
-        print(log.format(i, (s2 - s1)))
-        val_time.append(s2 - s1)
-
-        mtrain_loss = np.mean(train_loss)
-        mtrain_mae = np.mean(train_mae)
-        mvalid_loss = np.mean(val_loss)
-        mvalid_mae = np.mean(val_mae)
-
-        his_loss.append(mvalid_loss)
-        print("-----------------------")
-
-        log = "Epoch: {:03d}, Train Loss: {:.4f}, Train MAE: {:.4f} "
-        print(
-            log.format(i, mtrain_loss, mtrain_mae),
-            flush=True,
-        )
-        log = "Epoch: {:03d}, Valid Loss: {:.4f}, Valid MAE: {:.4f}"
-        print(
-            log.format(i, mvalid_loss, mvalid_mae),
-            flush=True,
-        )
-
-        if mvalid_loss < loss:
-            print("###Update tasks appear###")
-            if i <= 10:
-                # It is not necessary to print the results of the testset when epoch is less than n, because the model has not yet converged.
-                loss = mvalid_loss
-                torch.save(engine.model.state_dict(), path + "best_model.pth")
-                bestid = i
-                epochs_since_best_mse = 0
-                print("Updating! Valid Loss:{:.4f}".format(mvalid_loss), end=", ")
-                print("epoch: ", i)
-            else:
-                test_outputs = []
-                test_y = []
-
-                for iter, (x,y,x_mark,y_mark, embeddings) in enumerate(test_loader):
-                    testx = torch.Tensor(x).to(device)
-                    testy = torch.Tensor(y).to(device)
-                    testx_mark = torch.Tensor(x_mark).to(device)
-                    test_embedding = torch.Tensor(embeddings).to(device)
-                    with torch.no_grad():
-                        preds = engine.model(testx, testx_mark, test_embedding)
-                    test_outputs.append(preds)
-                    test_y.append(testy)
-                
-                test_pre = torch.cat(test_outputs, dim=0)
-                test_real = torch.cat(test_y, dim=0)
-
-                amse = []
-                amae = []
-                
-                for j in range(args.pred_len):
-                    pred = test_pre[:, j,].to(device)
-                    real = test_real[:, j, ].to(device)
-                    metrics = metric(pred, real)
-                    log = "Evaluate best model on test data for horizon {:d}, Test MSE: {:.4f}, Test MAE: {:.4f}"
-                    amse.append(metrics[0])
-                    amae.append(metrics[1])
-
-                log = "On average horizons, Test MSE: {:.4f}, Test MAE: {:.4f}"
-                print(
-                    log.format(
-                        np.mean(amse), np.mean(amae)
-                    )
-                )
-
-                if np.mean(amse) < test_log:
-                    test_log = np.mean(amse)
-                    loss = mvalid_loss
-                    torch.save(engine.model.state_dict(), path + "best_model.pth")
-                    epochs_since_best_mse = 0
-                    print("Test low! Updating! Test Loss: {:.4f}".format(np.mean(amse)), end=", ")
-                    print("Test low! Updating! Valid Loss: {:.4f}".format(mvalid_loss), end=", ")
-
-                    bestid = i
-                    print("epoch: ", i)
-                else:
-                    epochs_since_best_mse += 1
-                    print("No update")
-
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='TS-CVA Training')
+    
+    # Dataset arguments
+    parser.add_argument('dataset', help='The dataset name')
+    parser.add_argument('run_name', help='The folder name for saving outputs')
+    parser.add_argument('--loader', type=str, required=True,
+                        help='Data loader: UCR, UEA, forecast_csv, forecast_csv_univar')
+    
+    # Training arguments
+    parser.add_argument('--gpu', type=int, default=0, help='GPU device id')
+    parser.add_argument('--batch-size', type=int, default=8, help='Batch size')
+    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
+    parser.add_argument('--epochs', type=int, default=None, help='Number of epochs')
+    parser.add_argument('--iters', type=int, default=None, help='Number of iterations')
+    parser.add_argument('--save-every', type=int, default=None, help='Save checkpoint frequency')
+    parser.add_argument('--seed', type=int, default=None, help='Random seed')
+    parser.add_argument('--max-threads', type=int, default=None, help='Max threads')
+    
+    # Model arguments
+    parser.add_argument('--repr-dims', type=int, default=320, help='Representation dimension')
+    parser.add_argument('--hidden-dims', type=int, default=64, help='Hidden dimension')
+    parser.add_argument('--depth', type=int, default=10, help='Encoder depth')
+    parser.add_argument('--num-heads', type=int, default=8, help='Number of attention heads')
+    parser.add_argument('--d-llm', type=int, default=768, help='LLM embedding dimension')
+    parser.add_argument('--d-ff', type=int, default=256, help='Feed-forward dimension')
+    parser.add_argument('--dropout', type=float, default=0.1, help='Dropout rate')
+    parser.add_argument('--max-train-length', type=int, default=3000, help='Max training sequence length')
+    
+    # Cross-modal arguments
+    parser.add_argument('--use-cross-modal', action='store_true', help='Enable cross-modal alignment')
+    parser.add_argument('--cross-modal-weight', type=float, default=0.3, help='Cross-modal loss weight')
+    parser.add_argument('--llm-embeddings', type=str, default=None, help='Path to LLM embeddings')
+    
+    # Other arguments
+    parser.add_argument('--irregular', type=float, default=0, help='Missing data ratio')
+    parser.add_argument('--eval', action='store_true', help='Evaluate after training')
+    
+    args = parser.parse_args()
+    
+    # Create run directory
+    run_dir = 'training/' + args.dataset + '__' + name_with_datetime(args.run_name)
+    os.makedirs(run_dir, exist_ok=True)
+    
+    # Setup logging
+    sys.stdout = DualOutput(f'{run_dir}/output.log')
+    sys.stderr = DualErrorOutput(f'{run_dir}/error.log')
+    
+    print("=" * 60)
+    print("TS-CVA Training")
+    print("=" * 60)
+    print(f"Dataset: {args.dataset}")
+    print(f"Arguments: {args}")
+    print(f"Run directory: {run_dir}")
+    print("=" * 60)
+    
+    # Initialize device
+    device = init_dl_program(args.gpu, seed=args.seed, max_threads=args.max_threads)
+    
+    # Load data
+    print('Loading data...', end=' ')
+    
+    if args.loader == 'UCR':
+        task_type = 'classification'
+        train_data, train_labels, test_data, test_labels = datautils.load_UCR(args.dataset)
+        
+    elif args.loader == 'UEA':
+        task_type = 'classification'
+        train_data, train_labels, test_data, test_labels = datautils.load_UEA(args.dataset)
+        
+    elif args.loader == 'forecast_csv':
+        task_type = 'forecasting'
+        data, train_slice, valid_slice, test_slice, scaler, pred_lens, n_covariate_cols = \
+            datautils.load_forecast_csv(args.dataset)
+        train_data = data[:, train_slice]
+        test_data = data[:, valid_slice]
+        
+    elif args.loader == 'forecast_csv_univar':
+        task_type = 'forecasting'
+        data, train_slice, valid_slice, test_slice, scaler, pred_lens, n_covariate_cols = \
+            datautils.load_forecast_csv(args.dataset, univar=True)
+        train_data = data[:, train_slice]
+        test_data = data[:, valid_slice]
+        
+    elif args.loader == 'forecast_npy':
+        task_type = 'forecasting'
+        data, train_slice, valid_slice, test_slice, scaler, pred_lens, n_covariate_cols = \
+            datautils.load_forecast_npy(args.dataset)
+        train_data = data[:, train_slice]
+        test_data = data[:, valid_slice]
+        
+    else:
+        raise ValueError(f"Unknown loader: {args.loader}")
+    
+    # Handle irregular data
+    if args.irregular > 0:
+        if task_type == 'classification':
+            train_data = data_dropout(train_data, args.irregular)
+            test_data = data_dropout(test_data, args.irregular)
         else:
-            epochs_since_best_mse += 1
-            print("No update")
-
-        engine.scheduler.step()
-
-        if epochs_since_best_mse >= args.es_patience and i >= args.epochs//2: # early stop
-            break
-
-    # Output consumption
-    print("Average Training Time: {:.4f} secs/epoch".format(np.mean(train_time)))
-    print("Average Validation Time: {:.4f} secs".format(np.mean(val_time)))
-
-    # Test
-    print("Training ends")
-    print("The epoch of the best result：", bestid)
-    print("The valid loss of the best model", str(round(his_loss[bestid - 1], 4)))
-   
-    engine.model.load_state_dict(torch.load(path + "best_model.pth"))
+            raise ValueError(f"Irregular data not supported for {task_type}")
     
-    test_outputs = []
-    test_y = []
-
-    for iter, (x,y,x_mark,y_mark, embeddings) in enumerate(test_loader):
-        testx = torch.Tensor(x).to(device)
-        testy = torch.Tensor(y).to(device)
-        testx_mark = torch.Tensor(x_mark).to(device)
-        test_embedding = torch.Tensor(embeddings).to(device)
-        with torch.no_grad():
-            preds = engine.model(testx, testx_mark, test_embedding)
-        test_outputs.append(preds)
-        test_y.append(testy)
-
-    test_pre = torch.cat(test_outputs, dim=0)
-    test_real = torch.cat(test_y, dim=0)
-
-    amse = []
-    amae = []
+    print('done')
+    print(f"Train data shape: {train_data.shape}")
+    print(f"Test data shape: {test_data.shape}")
     
-    for j in range(args.pred_len):
-        pred = test_pre[:, j,].to(device)
-        real = test_real[:, j, ].to(device)
-        metrics = metric(pred, real)
-        log = "Evaluate best model on test data for horizon {:d}, Test MSE: {:.4f}, Test MAE: {:.4f}"
-        amse.append(metrics[0])
-        amae.append(metrics[1])
-
-    log = "On average horizons, Test MSE: {:.4f}, Test MAE: {:.4f}"
-    print(log.format(np.mean(amse), np.mean(amae)))
-
-if __name__ == "__main__":
-    t1 = time.time()
-    main()
-    t2 = time.time()
-    print("Total time spent: {:.4f}".format(t2 - t1))
+    # Load LLM embeddings if provided
+    train_llm_embeddings = None
+    test_llm_embeddings = None
+    
+    if args.llm_embeddings and args.use_cross_modal:
+        print(f'Loading LLM embeddings from {args.llm_embeddings}...', end=' ')
+        embeddings_data = np.load(args.llm_embeddings, allow_pickle=True)
+        if isinstance(embeddings_data, np.lib.npyio.NpzFile):
+            train_llm_embeddings = embeddings_data['train']
+            test_llm_embeddings = embeddings_data['test']
+        else:
+            # Assume single array, split according to data
+            n_train = train_data.shape[0]
+            train_llm_embeddings = embeddings_data[:n_train]
+            test_llm_embeddings = embeddings_data[n_train:]
+        print('done')
+        print(f"Train LLM embeddings shape: {train_llm_embeddings.shape}")
+    
+    # Setup callbacks
+    best_model_callback = save_best_model_callback(monitor='val_loss', mode='min')
+    
+    # Model configuration
+    config = dict(
+        batch_size=args.batch_size,
+        lr=args.lr,
+        output_dims=args.repr_dims,
+        hidden_dims=args.hidden_dims,
+        depth=args.depth,
+        num_heads=args.num_heads,
+        d_llm=args.d_llm,
+        d_ff=args.d_ff,
+        dropout=args.dropout,
+        max_train_length=args.max_train_length,
+        use_cross_modal=args.use_cross_modal,
+        cross_modal_weight=args.cross_modal_weight,
+        after_epoch_callback=best_model_callback
+    )
+    
+    if args.save_every is not None:
+        unit = 'epoch' if args.epochs is not None else 'iter'
+        config['after_iter_callback'] = save_checkpoint_callback(args.save_every, unit)
+    
+    # Initialize model
+    print("\nInitializing TS-CVA model...")
+    t = time.time()
+    
+    model = TSCVAWrapper(
+        input_dims=train_data.shape[-1],
+        device=device,
+        **config
+    )
+    
+    print(f"Model parameters: {sum(p.numel() for p in model._net.parameters()):,}")
+    
+    # Train
+    print("\nStarting training...")
+    total_loss_log, loss_log, val_loss_log = model.fit(
+        train_data,
+        test_data,
+        train_llm_embeddings=train_llm_embeddings,
+        test_llm_embeddings=test_llm_embeddings,
+        n_epochs=args.epochs,
+        n_iters=args.iters,
+        verbose=True
+    )
+    
+    # Save final model
+    model.save(f'{run_dir}/model.pkl')
+    
+    # Save loss logs
+    list_save(f'{run_dir}/total_loss.txt', total_loss_log)
+    list_save(f'{run_dir}/loss.txt', loss_log)
+    list_save(f'{run_dir}/val_loss.txt', val_loss_log)
+    
+    # Plot loss curves
+    try:
+        plot_loss_curves(f'{run_dir}/loss_curves', total_loss_log, loss_log, val_loss_log, cutoff=1)
+    except Exception as e:
+        print(f"Warning: Could not plot loss curves: {e}")
+    
+    training_time = time.time() - t
+    print(f"\nTraining time: {datetime.timedelta(seconds=int(training_time))}")
+    
+    # Evaluation
+    if args.eval:
+        print("\n" + "=" * 60)
+        print("Evaluation")
+        print("=" * 60)
+        
+        # Load best model
+        model.load(f'{run_dir}/model_best.pkl')
+        
+        if task_type == 'classification':
+            # Classification evaluation
+            print("\nClassification evaluation...")
+            out_classification, eval_res_classification = tasks.eval_classification(
+                model, train_data, train_labels, test_data, test_labels, eval_protocol='svm'
+            )
+            
+            os.makedirs(f'{run_dir}/classification', exist_ok=True)
+            string_save(f'{run_dir}/classification/eval_res.txt', str(eval_res_classification))
+            pkl_save(f'{run_dir}/classification/out.pkl', out_classification)
+            pkl_save(f'{run_dir}/classification/eval_res.pkl', eval_res_classification)
+            
+            print("Classification results:")
+            print(eval_res_classification)
+            
+            # Clustering evaluation
+            print("\nClustering evaluation...")
+            os.makedirs(f'{run_dir}/clustering', exist_ok=True)
+            out_clustering, eval_res_clustering = tasks.eval_clustering(
+                f'{run_dir}/clustering', model, test_data, test_labels
+            )
+            
+            string_save(f'{run_dir}/clustering/eval_res.txt', str(eval_res_clustering))
+            pkl_save(f'{run_dir}/clustering/out.pkl', out_clustering)
+            pkl_save(f'{run_dir}/clustering/eval_res.pkl', eval_res_clustering)
+            
+            print("Clustering results:")
+            print(eval_res_clustering)
+    
+    print("\n" + "=" * 60)
+    print("Finished!")
+    print("=" * 60)
