@@ -1,5 +1,7 @@
+# import sys
+# from pathlib import Path
+# sys.path.insert(0, str(Path(__file__).parent.parent))
 import torch
-import sys
 import os
 import time
 import h5py
@@ -34,7 +36,8 @@ def get_dataset(data_path, flag, input_len, output_len):
     return dataset_class(flag=flag, size=[input_len, 0, output_len], data_path=data_path)
 
 def save_embeddings(args):
-    device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+    # device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+    device = torch.device(args.device)
     train_set = get_dataset(args.data_path, 'train', args.input_len, args.output_len)
     test_set = get_dataset(args.data_path, 'test', args.input_len, args.output_len)
     val_set = get_dataset(args.data_path, 'val', args.input_len, args.output_len)
@@ -61,7 +64,13 @@ def save_embeddings(args):
     emb_time_path = f"./Results/emb_logs/"
     os.makedirs(emb_time_path, exist_ok=True)
 
+    print(f"Using device: {device}")
+    print(f"Saving embeddings to: {save_path}")
+    print(f"Data path: {args.data_path}, Divide: {args.divide}, Input length: {args.input_len}, Output length: {args.output_len}")
+    print(f"Number of samples: {len(data_loader)}")
+    print(f"Batch size: {args.batch_size}, Number of workers: {args.num_workers}")
     for i, (x, y, x_mark, y_mark) in enumerate(data_loader):
+        print(f"Processing sample {i+1}/{len(data_loader)}", end='\r', flush=True)
         embeddings = gen_prompt_emb.generate_embeddings(x.to(device), x_mark.to(device))
 
         file_path = f"{save_path}{i}.h5"
@@ -69,8 +78,6 @@ def save_embeddings(args):
             hf.create_dataset('embeddings', data = embeddings.cpu().numpy())
 
         # # Save and visualize the first sample
-        # if i >= 0:
-        #     break
     
 if __name__ == "__main__":
     args = parse_args()
