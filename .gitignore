@@ -2,6 +2,9 @@ TimeCMA/
 TS2Vec/
 datasets/
 training/
+plots/
 
 __pycache__/
 *.pyc
+
+env/
