@@ -114,11 +114,12 @@ def plot_loss_curves(dirs, output_dir):
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
     
     loss_types = [
-        ('forecast_train_loss.txt', 'Forecasting Train Loss (↓ Lower is Better)'),
-        ('forecast_val_loss.txt', 'Forecasting Validation Loss (↓ Lower is Better)')
+        ('forecast_train_loss.txt', 'Forecasting Train Loss (↓ Lower is Better)', 'loss_train_comparison.png'),
+        ('forecast_val_loss.txt', 'Forecasting Validation Loss (↓ Lower is Better)', 'loss_val_comparison.png')
     ]
     
-    for ax, (loss_file, title) in zip(axes, loss_types):
+    for loss_file, title, filename in loss_types:
+        fig, ax = plt.subplots(figsize=(10, 5))
         has_data = False
         for key, dir_path in dirs.items():
             loss = load_loss_file(os.path.join(dir_path, loss_file))
@@ -132,11 +133,12 @@ def plot_loss_curves(dirs, output_dir):
         if has_data:
             ax.legend(fontsize=10)
         ax.grid(True, alpha=0.3)
-    
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, 'loss_curves.png'), dpi=150, bbox_inches='tight')
-    plt.close()
-    print(f"✅ Saved: {output_dir}/loss_curves.png")
+        
+        plt.tight_layout()
+        output_path = os.path.join(output_dir, filename)
+        plt.savefig(output_path, dpi=150, bbox_inches='tight')
+        plt.close()
+        print(f"✅ Saved: {output_dir}/{filename}")
 
 
 def plot_individual_loss(dirs, output_dir):
