@@ -110,9 +110,7 @@ def load_summary(filepath):
 
 
 def plot_loss_curves(dirs, output_dir):
-    """Loss 곡선 플롯 - 3가지 모드 비교"""
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-    
+    """Loss 곡선 플롯 - 3가지 모드 비교 (Train/Val 개별 저장)"""
     loss_types = [
         ('forecast_train_loss.txt', 'Forecasting Train Loss (↓ Lower is Better)', 'loss_train_comparison.png'),
         ('forecast_val_loss.txt', 'Forecasting Validation Loss (↓ Lower is Better)', 'loss_val_comparison.png')
@@ -144,30 +142,28 @@ def plot_loss_curves(dirs, output_dir):
 def plot_individual_loss(dirs, output_dir):
     """각 모드별 개별 Loss 곡선"""
     for key, dir_path in dirs.items():
-        fig, ax = plt.subplots(figsize=(10, 6))
+        series = [
+            ('forecast_train_loss.txt', 'Train Loss (↓ Lower is Better)', '#3498db', 'train'),
+            ('forecast_val_loss.txt', 'Validation Loss (↓ Lower is Better)', '#e74c3c', 'val')
+        ]
         
-        train_loss = load_loss_file(os.path.join(dir_path, 'forecast_train_loss.txt'))
-        val_loss = load_loss_file(os.path.join(dir_path, 'forecast_val_loss.txt'))
-        
-        has_data = False
-        if train_loss is not None:
-            ax.plot(train_loss, label='Train Loss', color='#3498db', linewidth=2)
-            has_data = True
-        if val_loss is not None:
-            ax.plot(val_loss, label='Validation Loss', color='#e74c3c', linewidth=2)
-            has_data = True
-        
-        ax.set_xlabel('Epoch', fontsize=12)
-        ax.set_ylabel('Loss (↓ Lower is Better)', fontsize=12)
-        ax.set_title(f'{LABELS[key]} - Loss Curve (↓ Lower is Better)', fontsize=14, fontweight='bold')
-        if has_data:
-            ax.legend(fontsize=10)
-        ax.grid(True, alpha=0.3)
-        
-        plt.tight_layout()
-        plt.savefig(os.path.join(output_dir, f'loss_{key}.png'), dpi=150, bbox_inches='tight')
-        plt.close()
-        print(f"✅ Saved: {output_dir}/loss_{key}.png")
+        for filename, title, color, suffix in series:
+            loss = load_loss_file(os.path.join(dir_path, filename))
+            if loss is None:
+                continue
+            
+            fig, ax = plt.subplots(figsize=(10, 6))
+            ax.plot(loss, color=color, linewidth=2)
+            ax.set_xlabel('Epoch', fontsize=12)
+            ax.set_ylabel('Loss (↓ Lower is Better)', fontsize=12)
+            ax.set_title(f'{LABELS[key]} - {title}', fontsize=14, fontweight='bold')
+            ax.grid(True, alpha=0.3)
+            
+            plt.tight_layout()
+            out_path = os.path.join(output_dir, f'loss_{key}_{suffix}.png')
+            plt.savefig(out_path, dpi=150, bbox_inches='tight')
+            plt.close()
+            print(f"✅ Saved: {out_path}")
 
 
 def plot_overall_comparison(summaries, output_dir):
