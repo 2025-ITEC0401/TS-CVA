@@ -378,6 +378,146 @@ def plot_improvement_heatmap(summaries, output_dir):
     print(f"✅ Saved: {output_dir}/improvement_heatmap.png")
 
 
+def save_overall_comparison_csv(summaries, output_dir):
+    """전체 성능 비교 CSV 저장"""
+    import csv
+    
+    filepath = os.path.join(output_dir, 'overall_comparison.csv')
+    
+    metrics = ['mape', 'dir_acc', 'rmse', 'mae']
+    headers = ['Model', 'MAPE (%)', 'Direction Accuracy (%)', 'RMSE', 'MAE']
+    
+    with open(filepath, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        
+        for key in ['ts2vec', 'crossmodal', 'withnews']:
+            if key in summaries and summaries[key] is not None:
+                row = [LABELS[key]]
+                for metric in metrics:
+                    val = summaries[key]['overall'].get(metric, '')
+                    row.append(f'{val:.4f}' if val != '' else '')
+                writer.writerow(row)
+    
+    print(f"✅ Saved: {output_dir}/overall_comparison.csv")
+
+
+def save_per_symbol_comparison_csv(summaries, output_dir):
+    """종목별 성능 비교 CSV 저장"""
+    import csv
+    
+    # 종목 리스트 추출
+    symbols = []
+    for key, summary in summaries.items():
+        if summary is not None and 'per_symbol' in summary:
+            symbols = list(summary['per_symbol'].keys())
+            break
+    
+    if not symbols:
+        return
+    
+    filepath = os.path.join(output_dir, 'per_symbol_comparison.csv')
+    
+    # 헤더 생성: Symbol, TS2Vec_MAPE, TS2Vec_DirAcc, TS2Vec_MAE, CrossModal_MAPE, ...
+    headers = ['Symbol']
+    for key in ['ts2vec', 'crossmodal', 'withnews']:
+        headers.extend([
+            f'{LABELS[key]}_MAPE(%)',
+            f'{LABELS[key]}_DirAcc(%)',
+            f'{LABELS[key]}_MAE'
+        ])
+    
+    with open(filepath, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        
+        for sym in symbols:
+            row = [sym]
+            for key in ['ts2vec', 'crossmodal', 'withnews']:
+                if key in summaries and summaries[key] is not None:
+                    sym_data = summaries[key]['per_symbol'].get(sym, {})
+                    row.append(f'{sym_data.get("mape", ""):.4f}' if 'mape' in sym_data else '')
+                    row.append(f'{sym_data.get("dir_acc", ""):.4f}' if 'dir_acc' in sym_data else '')
+                    row.append(f'{sym_data.get("mae", ""):.4f}' if 'mae' in sym_data else '')
+                else:
+                    row.extend(['', '', ''])
+            writer.writerow(row)
+    
+    print(f"✅ Saved: {output_dir}/per_symbol_comparison.csv")
+
+
+def save_improvement_csv(summaries, output_dir):
+    """TS2Vec 대비 개선율 CSV 저장"""
+    import csv
+    
+    if 'ts2vec' not in summaries or summaries['ts2vec'] is None:
+        return
+    
+    baseline = summaries['ts2vec']['overall']
+    
+    filepath = os.path.join(output_dir, 'improvement_over_ts2vec.csv')
+    
+    headers = ['Model', 'MAPE Improvement (%)', 'DirAcc Improvement (%)', 
+               'RMSE Improvement (%)', 'MAE Improvement (%)']
+    
+    with open(filepath, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        
+        # Baseline row
+        writer.writerow(['TS2Vec Only (Baseline)', '0.00', '0.00', '0.00', '0.00'])
+        
+        for key in ['crossmodal', 'withnews']:
+            if key in summaries and summaries[key] is not None:
+                row = [LABELS[key]]
+                
+                # MAPE, RMSE, MAE: 낮을수록 좋음 (감소하면 양수)
+                for metric in ['mape', 'rmse', 'mae']:
+                    base_val = baseline.get(metric, 1)
+                    new_val = summaries[key]['overall'].get(metric, base_val)
+                    if metric == 'mape':
+                        # MAPE 먼저 처리
+                        imp = ((base_val - new_val) / base_val) * 100
+                        row.append(f'{imp:+.2f}')
+                    elif metric == 'rmse':
+                        imp = ((base_val - new_val) / base_val) * 100
+                        # dir_acc 먼저 삽입
+                        pass
+                    elif metric == 'mae':
+                        pass
+                
+                # 다시 순서대로 계산
+                row = [LABELS[key]]
+                
+                # MAPE
+                base_val = baseline.get('mape', 1)
+                new_val = summaries[key]['overall'].get('mape', base_val)
+                imp = ((base_val - new_val) / base_val) * 100
+                row.append(f'{imp:+.2f}')
+                
+                # Direction Accuracy (높을수록 좋음)
+                base_dir = baseline.get('dir_acc', 50)
+                new_dir = summaries[key]['overall'].get('dir_acc', base_dir)
+                imp = ((new_dir - base_dir) / base_dir) * 100
+                row.append(f'{imp:+.2f}')
+                
+                # RMSE
+                base_val = baseline.get('rmse', 1)
+                new_val = summaries[key]['overall'].get('rmse', base_val)
+                imp = ((base_val - new_val) / base_val) * 100
+                row.append(f'{imp:+.2f}')
+                
+                # MAE
+                base_val = baseline.get('mae', 1)
+                new_val = summaries[key]['overall'].get('mae', base_val)
+                imp = ((base_val - new_val) / base_val) * 100
+                row.append(f'{imp:+.2f}')
+                
+                writer.writerow(row)
+    
+    print(f"✅ Saved: {output_dir}/improvement_over_ts2vec.csv")
+
+
 def main():
     if len(sys.argv) != 4:
         print("Usage: python scripts/plot_results.py <ts2vec_dir> <crossmodal_dir> <withnews_dir>")
@@ -430,8 +570,15 @@ def main():
     plot_radar_chart(summaries, output_dir)
     plot_improvement_heatmap(summaries, output_dir)
     
+    # CSV 저장
+    print("\n📄 Generating CSV files...")
+    
+    save_overall_comparison_csv(summaries, output_dir)
+    save_per_symbol_comparison_csv(summaries, output_dir)
+    save_improvement_csv(summaries, output_dir)
+    
     print("\n" + "=" * 60)
-    print("✅ All plots saved successfully!")
+    print("✅ All plots and CSV files saved successfully!")
     print("=" * 60)
 
 
