@@ -1,0 +1,4 @@
+Model,MAPE Improvement (%),DirAcc Improvement (%),RMSE Improvement (%),MAE Improvement (%)
+TS2Vec Only (Baseline),0.00,0.00,0.00,0.00
+Cross-Modal,-16.12,+6.22,-5.59,-12.70
+With News,-19.18,+3.46,-8.76,-16.47

@@ -1,0 +1,4 @@
+Model,MAPE (%),Direction Accuracy (%),RMSE,MAE
+TS2Vec Only,4.9000,63.0400,17.8782,12.7953
+Cross-Modal,5.6900,66.9600,18.8768,14.4198
+With News,5.8400,65.2200,19.4452,14.9028

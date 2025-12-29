@@ -1,0 +1,498 @@
+{
+  "crawl_date": "2025-12-02T16:22:45.648907",
+  "symbols": [
+    "^GSPC",
+    "^DJI",
+    "^IXIC",
+    "^RUT",
+    "^VIX"
+  ],
+  "news_by_symbol": {
+    "^GSPC": [
+      {
+        "title": "Stock market today: Dow, S&P 500, Nasdaq futures inch down after stocks, bitcoin get hit to begin December",
+        "summary": "Stock futures rose after a day of strong declines as crypto markets collapsed and tech continued to grapple with valuation concerns.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-12-01T23:48:30Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "Earnings live: MongoDB stock soars on strong Q3 results as reports from CrowdStrike, Marvell loom",
+        "summary": "The third quarter earnings season has been mostly positive, with most of the reports in the rearview mirror.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-12-01T21:24:48Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "Shopify outage disrupts Cyber Monday, Strategy's bitcoin KPI target",
+        "summary": "Yahoo Finance senior reporter Allie Canal tracks today's top moving stocks and biggest market stories in this Market Minute, including US stocks (^DJI, ^IXIC, ^GSPC) falling as the ISM reports manufacturing activity contracting for the ninth straight month; Shopify's (SHOP) outage that is disrupting Cyber Monday shopping for merchants; and Strategy (MSTR) cuts it full-year KPI (key performance indicators) targets on bitcoin (BTC-USD) as the cryptocurrency continues to experience volatility in December's first trading session. Stay up to date on the latest market action, minute-by-minute, with&nbsp;Yahoo Finance's Market Minute.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-12-01T19:07:20Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "4 catalysts that could fuel market gains through December",
+        "summary": "Charles Schwab asset management CEO and chief investment officer, Omar Aguilar, and RBC Capital Markets head of derivatives strategy, Amy Wu Silverman, join Market Catalysts host Julie Hyman to examine what could send the market higher over the next few months. The strategists outline four potential market catalysts: the Federal Reserve cutting interest rates, signals that AI spending is sustainable, consumer spending confidence, and Oracle (ORCL) earnings. To watch more expert insights and analysis on the latest market action, check out more Market Catalysts.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-12-01T11:00:55Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "'I don't know if we'll get that Santa rally': Why Wall Street says December may break from its usual strength",
+        "summary": "Wall Street says this year's Santa Claus rally may not arrive, with rising volatility, Fed uncertainty, and shifting AI-driven market dynamics clouding the December playbook.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-11-30T12:06:08Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "Asian shares advance after a retreat on Wall Street",
+        "summary": "Asian shares mostly advanced on Tuesday after U.S. stocks gave back some of last week’s rally, pressured by rising global bond yields.  U.S. futures and oil prices were little changed.  The Kospi in South Korea jumped 1.5% to 3,977.85, led by buying of technology shares like Samsung Electronics, which surged 2.8%.",
+        "publisher": "Associated Press Finance",
+        "published": "2025-12-02T04:44:41Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "2 Crypto Stocks to Buy Hand Over First",
+        "summary": "Crypto tailwinds aren't the only catalyst for these promising growth stocks.",
+        "publisher": "Motley Fool",
+        "published": "2025-12-02T04:08:00Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "Stock market news: Dow, S&P, Nasdaq slip; US big pharma deal with UK, and Bitcoin falters",
+        "summary": "December did not start well for the market, with all the major indices in the red. Will the theories urging caution against expecting a Santa Claus rally hold? Well, this is just Day 1, and for some, the Christmas tree decorations are still pending. So let us not entirely give up on the holiday ...",
+        "publisher": "TheStreet",
+        "published": "2025-12-02T04:03:00Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "Dow Jones Futures: Apple, Broadcom, Nvidia, Shopify Are Big Movers; Credo, MongoDB Soar Late",
+        "summary": "Dow Jones Futures: Apple, Broadcom, Nvidia stock and Shopify were big movers Monday, as the Dow Jones industrials dropped 427 points.",
+        "publisher": "Investor's Business Daily",
+        "published": "2025-12-02T02:50:22Z",
+        "symbol": "^GSPC"
+      },
+      {
+        "title": "Warren Buffett, Weeks Before His Retirement, Has a Warning for Wall Street. History Says This May Happen in 2026.",
+        "summary": "Buffett's actions are speaking louder than words.",
+        "publisher": "Motley Fool",
+        "published": "2025-12-02T02:05:00Z",
+        "symbol": "^GSPC"
+      }
+    ],
+    "^DJI": [
+      {
+        "title": "Stock market today: Dow, S&P 500, Nasdaq futures inch down after stocks, bitcoin get hit to begin December",
+        "summary": "Stock futures rose after a day of strong declines as crypto markets collapsed and tech continued to grapple with valuation concerns.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-12-01T23:48:30Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Shopify outage disrupts Cyber Monday, Strategy's bitcoin KPI target",
+        "summary": "Yahoo Finance senior reporter Allie Canal tracks today's top moving stocks and biggest market stories in this Market Minute, including US stocks (^DJI, ^IXIC, ^GSPC) falling as the ISM reports manufacturing activity contracting for the ninth straight month; Shopify's (SHOP) outage that is disrupting Cyber Monday shopping for merchants; and Strategy (MSTR) cuts it full-year KPI (key performance indicators) targets on bitcoin (BTC-USD) as the cryptocurrency continues to experience volatility in December's first trading session. Stay up to date on the latest market action, minute-by-minute, with&nbsp;Yahoo Finance's Market Minute.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-12-01T19:07:20Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Dow Jones Futures: Apple, Broadcom, Nvidia, Shopify Are Big Movers; Credo, MongoDB Soar Late",
+        "summary": "Dow Jones Futures: Apple, Broadcom, Nvidia stock and Shopify were big movers Monday, as the Dow Jones industrials dropped 427 points.",
+        "publisher": "Investor's Business Daily",
+        "published": "2025-12-02T02:50:22Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Review & Preview: Rally Regrets",
+        "summary": "The holiday season is in full swing, but investors weren’t in the buying mood Monday.  The Nasdaq Composite lost 0.5%.  “Traders are having second thoughts, it seems, about having run stocks up as much as they did last week,” writes Thierry Wizman, global FX and rates strategist at Macquarie Group.",
+        "publisher": "Barrons.com",
+        "published": "2025-12-02T00:55:00Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Wall Street ends lower, crypto stocks drop",
+        "summary": "<body><p>STORY: U.S. stocks closed lower on Monday, with the Dow losing nine-tenths of a percent, the S&P 500 shedding more than half a percent and the Nasdaq dropping over a third of a percent.</p><p>High stock valuations and the future path of&nbsp;interest rates continue to drive market action, says Melissa Brown, managing director of investment decision research at SimCorp.</p><p>“I think we've just been going back and forth between risk on days and risk off days. And it kind of suggests this underlying volatility that investors can't really make up their mind. And so they're just having a hard time. Today it's AI or today it's not AI. Tomorrow you know, it may be and or you know, it may also be, you know, the Fed and the back and forth. First of all, is the Fed going to lower rates? And second of all, if they lower rates, is that good news or bad news?\"</p><p>Markets have largely priced in a December rate cut from the Fed. Despite those expectations, U.S. Treasury yields were higher on Monday, pressuring stocks.</p><p>Bitcoin also stumbled, at one point dropping below $85,000.</p><p>Shares of Strategy, formerly known as MicroStrategy and the world's largest holder of bitcoin, ended more than 3% lower after tumbling as much as 12%. It cut its earnings forecast for 2025, citing a weak run in bitcoin.</p><p>Crypto-related stocks Coinbase and Bitfarms also fell.&nbsp;</p><p>Among other movers, Synopsys shares closed about 5% higher after AI chip leader Nvidia said it had invested $2 billion in the semiconductor design software provider.</p></body>",
+        "publisher": "Reuters Videos",
+        "published": "2025-12-01T23:42:27Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "AeroVironment (AVAV) Registers a Bigger Fall Than the Market: Important Facts to Note",
+        "summary": "In the closing of the recent trading day, AeroVironment (AVAV) stood at $257.8, denoting a -7.75% move from the preceding trading day.",
+        "publisher": "Zacks",
+        "published": "2025-12-01T23:15:02Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "RH (RH) Advances While Market Declines: Some Information for Investors",
+        "summary": "RH (RH) closed at $160.68 in the latest trading session, marking a +1.96% move from the prior day.",
+        "publisher": "Zacks",
+        "published": "2025-12-01T23:15:02Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Tilray Brands, Inc. (TLRY) Registers a Bigger Fall Than the Market: Important Facts to Note",
+        "summary": "Tilray Brands, Inc. (TLRY) closed the most recent trading day at $0.78, moving 3.76% from the previous trading session.",
+        "publisher": "Zacks",
+        "published": "2025-12-01T23:00:02Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Accenture (ACN) Rises As Market Takes a Dip: Key Facts",
+        "summary": "Accenture (ACN) concluded the recent trading session at $257.43, signifying a +2.97% move from its prior day's close.",
+        "publisher": "Zacks",
+        "published": "2025-12-01T22:50:02Z",
+        "symbol": "^DJI"
+      },
+      {
+        "title": "Here's Why Intuitive Surgical, Inc. (ISRG) Fell More Than Broader Market",
+        "summary": "In the closing of the recent trading day, Intuitive Surgical, Inc. (ISRG) stood at $567.37, denoting a -1.07% move from the preceding trading day.",
+        "publisher": "Zacks",
+        "published": "2025-12-01T22:50:02Z",
+        "symbol": "^DJI"
+      }
+    ],
+    "^IXIC": [
+      {
+        "title": "Stock market today: Dow, S&P 500, Nasdaq futures inch down after stocks, bitcoin get hit to begin December",
+        "summary": "Stock futures rose after a day of strong declines as crypto markets collapsed and tech continued to grapple with valuation concerns.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-12-01T23:48:30Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Shopify outage disrupts Cyber Monday, Strategy's bitcoin KPI target",
+        "summary": "Yahoo Finance senior reporter Allie Canal tracks today's top moving stocks and biggest market stories in this Market Minute, including US stocks (^DJI, ^IXIC, ^GSPC) falling as the ISM reports manufacturing activity contracting for the ninth straight month; Shopify's (SHOP) outage that is disrupting Cyber Monday shopping for merchants; and Strategy (MSTR) cuts it full-year KPI (key performance indicators) targets on bitcoin (BTC-USD) as the cryptocurrency continues to experience volatility in December's first trading session. Stay up to date on the latest market action, minute-by-minute, with&nbsp;Yahoo Finance's Market Minute.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-12-01T19:07:20Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Stocks drift back toward record highs as the final month of 2025 gets underway: What to watch this week",
+        "summary": "As the market moves into December, investors will be watching for Fed updates and a steadier performance environment than they got in November.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-11-30T12:27:43Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Stock market news: Dow, S&P, Nasdaq slip; US big pharma deal with UK, and Bitcoin falters",
+        "summary": "December did not start well for the market, with all the major indices in the red. Will the theories urging caution against expecting a Santa Claus rally hold? Well, this is just Day 1, and for some, the Christmas tree decorations are still pending. So let us not entirely give up on the holiday ...",
+        "publisher": "TheStreet",
+        "published": "2025-12-02T04:03:00Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Peter Schiff Says Michael Saylor Strategy-Bitcoin Model Is 'Fraud' And MSTR Is 'Broken'",
+        "summary": "Peter Schiff has cast doubt on Bitcoin (CRYPTO: BTC) and Strategy (NASDAQ:MSTR), accusing Michael Saylor of running an unsustainable business model that he argues looks increasingly like a \"fraud.\" What Happened: In a new X post, Schiff claimed ...",
+        "publisher": "Benzinga",
+        "published": "2025-12-02T01:31:04Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Review & Preview: Rally Regrets",
+        "summary": "The holiday season is in full swing, but investors weren’t in the buying mood Monday.  The Nasdaq Composite lost 0.5%.  “Traders are having second thoughts, it seems, about having run stocks up as much as they did last week,” writes Thierry Wizman, global FX and rates strategist at Macquarie Group.",
+        "publisher": "Barrons.com",
+        "published": "2025-12-02T00:55:00Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Why Did Cardano Slide 7.2% Today?",
+        "summary": "The Bank of Japan may raise interest rates.",
+        "publisher": "Motley Fool",
+        "published": "2025-12-02T00:47:43Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Why Did Ethereum Fall 6.4% Today?",
+        "summary": "Expectations of more rate cuts from the Fed were overshadowed.",
+        "publisher": "Motley Fool",
+        "published": "2025-12-02T00:37:19Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Why Did XRP Plummet 6.2% Today?",
+        "summary": "The banking crypto is facing pressure from the Bank of Japan.",
+        "publisher": "Motley Fool",
+        "published": "2025-12-02T00:23:54Z",
+        "symbol": "^IXIC"
+      },
+      {
+        "title": "Wall Street ends lower, crypto stocks drop",
+        "summary": "<body><p>STORY: U.S. stocks closed lower on Monday, with the Dow losing nine-tenths of a percent, the S&P 500 shedding more than half a percent and the Nasdaq dropping over a third of a percent.</p><p>High stock valuations and the future path of&nbsp;interest rates continue to drive market action, says Melissa Brown, managing director of investment decision research at SimCorp.</p><p>“I think we've just been going back and forth between risk on days and risk off days. And it kind of suggests this underlying volatility that investors can't really make up their mind. And so they're just having a hard time. Today it's AI or today it's not AI. Tomorrow you know, it may be and or you know, it may also be, you know, the Fed and the back and forth. First of all, is the Fed going to lower rates? And second of all, if they lower rates, is that good news or bad news?\"</p><p>Markets have largely priced in a December rate cut from the Fed. Despite those expectations, U.S. Treasury yields were higher on Monday, pressuring stocks.</p><p>Bitcoin also stumbled, at one point dropping below $85,000.</p><p>Shares of Strategy, formerly known as MicroStrategy and the world's largest holder of bitcoin, ended more than 3% lower after tumbling as much as 12%. It cut its earnings forecast for 2025, citing a weak run in bitcoin.</p><p>Crypto-related stocks Coinbase and Bitfarms also fell.&nbsp;</p><p>Among other movers, Synopsys shares closed about 5% higher after AI chip leader Nvidia said it had invested $2 billion in the semiconductor design software provider.</p></body>",
+        "publisher": "Reuters Videos",
+        "published": "2025-12-01T23:42:27Z",
+        "symbol": "^IXIC"
+      }
+    ],
+    "^RUT": [
+      {
+        "title": "3 winning sectors outside of the AI trade",
+        "summary": "Nationwide chief market strategist, Mark Hackett, joins Morning Brief host Julie Hyman to explain why he sees three sectors in particular as winners outside of the artificial intelligence (AI) trade. To watch more expert insights and analysis on the latest market action, check out more Morning Brief.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-12-01T11:00:12Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "Small caps are the 'best barometer' of US economic health",
+        "summary": "Marketgauge.com chief strategist Michele Schneider joins Yahoo Finance Markets and Data Editor Jared Blikre and Morning Brief host Julie Hyman to explain why she's keeping a close eye on small-cap stocks (^RUT). To watch more expert insights and analysis on the latest market action, check out more&nbsp;Morning Brief.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-11-28T17:30:00Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "The Russell 2000 Is Riding Its Best 4-Day Stretch in a Year",
+        "summary": "A resurgence in December rate-cut hopes has been a boon for small-cap stocks. The Russell 2000 rallied 0.8% on Wednesday, which brought its winning streak to four days. The small-cap index is up nearly 7.",
+        "publisher": "Barrons.com",
+        "published": "2025-11-26T21:44:07Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "Small-caps, Alphabet's path to $4T, healthcare: Market Takeaways",
+        "summary": "US stocks (^DJI, ^IXIC, ^GSPC) continue their rally to close Tuesday's session higher, led by the Dow Jones Industrial Average's intraday gains of 1.43%. Yahoo Finance markets and data editor Jared Blikre breaks down the biggest market themes from today’s trading day, including the Russell 2000 small cap index's (^RUT) cycle of gains, Alphabet's (GOOG, GOOGL) path to reaching a $4 trillion market cap, and the growth in the healthcare (XLV) sector. To watch more expert insights and analysis on the latest market action, check out more&nbsp;Asking for a Trend.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-11-25T22:15:00Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "Stocks Are Getting Slammed Again. This Isn’t the Time to Panic.",
+        "summary": "The latest market sell-off is another sign of tech/AI froth. But there are other pockets of the market that still look attractive.",
+        "publisher": "Barrons.com",
+        "published": "2025-11-18T21:30:00Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "Russell 2000 Falls on Terrible Times",
+        "summary": "An index encapsulating the smallest U.S. companies by market value has been underperforming lately.  The small-cap Russell 2000 is down 3.5% over the past month, while large cap indexes--the Dow and S&P 500---are up 2.6% and 1.7%, respectively.  An index capturing emerging market companies, the MSCI EM, is up 0.5% while its counterpart, the FTSE All-World Developed is higher by 1.3%.",
+        "publisher": "Barrons.com",
+        "published": "2025-11-17T17:36:04Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "Don’t Buy the Stock Market Dip. These Charts of Small-Cap and Semiconductor Stocks Explain Why.",
+        "summary": "Last Tuesday the  completed a bearish island reversal with a rare gap down of 2%.  The weekly doji candle on the  last week still looms large.  This candle often appears at inflection points when a prevailing trend is about to reverse.",
+        "publisher": "Barrons.com",
+        "published": "2025-11-14T16:04:00Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "The Stock Market Is Tumbling. Here’s How to Play Defense.",
+        "summary": "When it comes to protecting a portfolio against a market correction, it may be better to load up on Treasuries–a lot of them–than defensive stocks.  The S&P 500 is up almost 17% this year and the Nasdaq Composite has gained more than 21%.  It would be understandable if investors chose to stick with what’s working: simply rotating into more traditionally defensive sectors like consumer staples, utilities, and healthcare, rather than fixed income.",
+        "publisher": "Barrons.com",
+        "published": "2025-11-14T13:25:00Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "Russell 2000’s Very Bad Day",
+        "summary": "It was a bad day to be a small-cap stock. The Russell 2000 was the worst-performing of all four major indexes, sinking roughly 2.8% Thursday. Investors' doubts that the Federal Reserve will cut interest rates next month are hitting shares of smaller companies, which are considered more sensitive to rate moves.",
+        "publisher": "The Wall Street Journal",
+        "published": "2025-11-13T23:20:30Z",
+        "symbol": "^RUT"
+      },
+      {
+        "title": "This chart shows the risk of an AI bubble is growing, says a stalwart stock-market bull",
+        "summary": "The largest companies have seen their weighting in the S 500 rise more quickly than their share of total earnings",
+        "publisher": "MarketWatch",
+        "published": "2025-11-03T22:29:00Z",
+        "symbol": "^RUT"
+      }
+    ],
+    "^VIX": [
+      {
+        "title": "Stocks end streak, Japanese yen, bitcoin sell-off: Market Takeaways",
+        "summary": "US stocks (^DJI, ^IXIC, ^GSPC) snapped the win streak from their late-November rally as all three of the market averages closed lower. Yahoo Finance markets and data editor Jared Blikre breaks down the biggest market themes from today’s trading day, including 2025's volatility (^VIX), the Japanese yen, and bitcoin's (BTC-USD) continued sell-off in the first trading session of 2025. To watch more expert insights and analysis on the latest market action, check out more&nbsp;Asking for a Trend.",
+        "publisher": "Yahoo Finance Video",
+        "published": "2025-12-01T22:03:11Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "US Equity Indexes Break Five-Session Winning Streak Amid Thin Trading Volumes, Bitcoin Sell-Off",
+        "summary": "US equity indexes fell on thin volumes on Monday, the first retreat in six days, amid a surge in gov",
+        "publisher": "MT Newswires",
+        "published": "2025-12-01T22:13:44Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "US Equity Indexes in Broad-Based Retreat",
+        "summary": "US equity indexes fell ahead of the close on Monday amid a surge in government bond yields. The D",
+        "publisher": "MT Newswires",
+        "published": "2025-12-01T20:49:27Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "Exxon and 15 More ‘Quality’ Stocks to Own for a Volatile Market",
+        "summary": "The market has staged an impressive rebound, but is in for more volatility.  The overarching up-and-down dynamic starts with the fact that sellers have been coming in near the market’s highs to knock stock prices lower because investors and traders know that the more artificial-intelligence spending happens today, the greater the likelihood that the spending will collapse tomorrow.  The  Cboe  Volatility Index, which shows the magnitude of expected swings in stock prices, hit 18 early Monday, down from about 26 in mid November but above its low for the year of about 14.",
+        "publisher": "Barrons.com",
+        "published": "2025-12-01T19:22:00Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "1 No-Brainer International Vanguard ETF to Buy Right Now for Less Than $100",
+        "summary": "A weakening dollar makes this ETF more appealing.",
+        "publisher": "Motley Fool",
+        "published": "2025-11-29T13:46:00Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "US Stock Indexes Rise for Fifth Straight Day in Holiday-Shortened Friday",
+        "summary": "US equity indexes rose for the fifth consecutive session on Friday amid thin trading volumes, declin",
+        "publisher": "MT Newswires",
+        "published": "2025-11-28T19:05:27Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "My 2 Favorite Stocks to Buy Now",
+        "summary": "The recent sell-off has created some attractive opportunities.",
+        "publisher": "Motley Fool",
+        "published": "2025-11-28T12:20:00Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "Bitcoin and S&P 500 Year-End Bull Run Loading? Vol Metrics Say Yes",
+        "summary": "Implied volatility indices tied to bitcoin and the S&P 500 have erased the recent spike, offering bullish price signals.",
+        "publisher": "CoinDesk",
+        "published": "2025-11-28T06:24:35Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "Stock Market News: Campbell’s in hot soup, Robinhood's bets pays off, and Dell gains",
+        "summary": "The holiday season is here, and the enthusiasm of the long weekend was reflected in the market gains, which advanced for a third consecutive day on Wednesday, November 26, 2025. The S&P 500 rose 0.7% today, buoyed by a significant surge in Robinhood's stock.The tech-heavy Nasdaq Composite rose ...",
+        "publisher": "TheStreet",
+        "published": "2025-11-27T03:03:00Z",
+        "symbol": "^VIX"
+      },
+      {
+        "title": "US Equity Indexes Rise Amid Thin Volumes as Weak Economic Data Keeps Policy Easing Bets Elevated",
+        "summary": "US equity indexes rose for the fourth straight day on Wednesday, albeit amid thin volumes, as weakne",
+        "publisher": "MT Newswires",
+        "published": "2025-11-26T21:58:40Z",
+        "symbol": "^VIX"
+      }
+    ],
+    "MARKET": [
+      {
+        "title": "Trump’s Potential Fed Chair Pick: How It Could Impact Interest Rates and ETFs",
+        "summary": "<p>President Trump's recent comments regarding the Federal Reserve leadership have created uncertainty. Although Fed Chair Jerome Powell's term lasts until May 2026, Trump's criticism and potential nominee speculations caused market volatility. A new Fed chair aligned with Trump's views might compromise the Fed's independence. Markets anticipate faster rate cuts under a new chair. This outlook could benefit bond and fixed-income ETFs in the short term.</p>",
+        "publisher": "etf.com",
+        "published": "2025-12-02T02:07:43Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "S&P 500 to Hit At Least 7,500-Mark in 2026? ETFs in Focus",
+        "summary": "Wall Street sees the S&P 500 hitting 7,500-8,000 in 2026 on AI-fueled earnings growth and rate-cut hopes. ETFs like VOO, IVV and SPY stand to benefit.",
+        "publisher": "Zacks",
+        "published": "2025-12-01T19:00:00Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "Battle of the S&P 500 ETFs: How VOO Compares to SPY on Fees, Yield, and Risk",
+        "summary": "Expense ratios and fund structure can quietly impact long-term returns. Here’s how these two S&P 500 ETFs stack up.",
+        "publisher": "Motley Fool",
+        "published": "2025-12-01T18:52:45Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "Exchange-Traded Funds, Equity Futures Lower Pre-Bell Monday Ahead of Manufacturing Reports",
+        "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was down 0.7% and the actively tr",
+        "publisher": "MT Newswires",
+        "published": "2025-12-01T13:57:43Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "11 Stocks Turn $10,000 Into $392,513 In 11 Months",
+        "summary": "The S&P 500 eked out another gain in November, stringing together the seventh-straight monthly gain.",
+        "publisher": "Investor's Business Daily",
+        "published": "2025-12-01T13:00:08Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "S&P 500 Delivers Best Thanksgiving Week Since 2008",
+        "summary": "Market Momentum Unleashed: S&P 500 Crushes Thanksgiving Records",
+        "publisher": "GuruFocus.com",
+        "published": "2025-12-01T10:43:44Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "10 truths about the stock market",
+        "summary": "There’s nothing the stock market hasn’t overcome.",
+        "publisher": "Yahoo Finance",
+        "published": "2025-11-29T14:07:17Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "Meta Platforms - High EVA Shows Why The Premium Is There",
+        "summary": "Meta's strong user growth and higher RPU is a leading factor to the bullish thesis.",
+        "publisher": "GuruFocus.com",
+        "published": "2025-11-28T19:21:11Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "This Rare ‘Perfect’ Market Indicator Says a Major Bull Market Is Coming",
+        "summary": "The stock market continues to send investors mixed messages, blending signs of resilience with hints of fragility. Economic data shows robust corporate earnings, yet labor market weakness, inflation and interest rate worries, and geopolitical tensions have sparked bouts of selling. Investors face a dilemma: commit fresh capital to equities amid record highs, or shift toward ... This Rare ‘Perfect’ Market Indicator Says a Major Bull Market Is Coming",
+        "publisher": "24/7 Wall St.",
+        "published": "2025-11-28T15:26:29Z",
+        "symbol": "SPY"
+      },
+      {
+        "title": "ETFs to Benefit From Rate Cut Bets and Upbeat Forecasts",
+        "summary": "ETFs to watch as Wall Street turns upbeat, with bullish forecasts putting the S&P 500 on track for 8,000 by 2026.",
+        "publisher": "Zacks",
+        "published": "2025-11-28T15:10:00Z",
+        "symbol": "SPY"
+      }
+    ]
+  },
+  "all_headlines": [
+    "Wall Street ends lower, crypto stocks drop",
+    "Here's Why Intuitive Surgical, Inc. (ISRG) Fell More Than Broader Market",
+    "Stocks drift back toward record highs as the final month of 2025 gets underway: What to watch this week",
+    "Small-caps, Alphabet's path to $4T, healthcare: Market Takeaways",
+    "My 2 Favorite Stocks to Buy Now",
+    "RH (RH) Advances While Market Declines: Some Information for Investors",
+    "The Stock Market Is Tumbling. Here’s How to Play Defense.",
+    "Exxon and 15 More ‘Quality’ Stocks to Own for a Volatile Market",
+    "Trump’s Potential Fed Chair Pick: How It Could Impact Interest Rates and ETFs",
+    "10 truths about the stock market",
+    "3 winning sectors outside of the AI trade",
+    "Stock Market News: Campbell’s in hot soup, Robinhood's bets pays off, and Dell gains",
+    "S&P 500 Delivers Best Thanksgiving Week Since 2008",
+    "Why Did Ethereum Fall 6.4% Today?",
+    "Don’t Buy the Stock Market Dip. These Charts of Small-Cap and Semiconductor Stocks Explain Why.",
+    "'I don't know if we'll get that Santa rally': Why Wall Street says December may break from its usual strength",
+    "1 No-Brainer International Vanguard ETF to Buy Right Now for Less Than $100",
+    "Warren Buffett, Weeks Before His Retirement, Has a Warning for Wall Street. History Says This May Happen in 2026.",
+    "4 catalysts that could fuel market gains through December",
+    "Stock market today: Dow, S&P 500, Nasdaq futures inch down after stocks, bitcoin get hit to begin December",
+    "Shopify outage disrupts Cyber Monday, Strategy's bitcoin KPI target",
+    "This chart shows the risk of an AI bubble is growing, says a stalwart stock-market bull",
+    "US Stock Indexes Rise for Fifth Straight Day in Holiday-Shortened Friday",
+    "Russell 2000 Falls on Terrible Times",
+    "This Rare ‘Perfect’ Market Indicator Says a Major Bull Market Is Coming",
+    "Russell 2000’s Very Bad Day",
+    "Earnings live: MongoDB stock soars on strong Q3 results as reports from CrowdStrike, Marvell loom",
+    "S&P 500 to Hit At Least 7,500-Mark in 2026? ETFs in Focus",
+    "Stocks end streak, Japanese yen, bitcoin sell-off: Market Takeaways",
+    "Tilray Brands, Inc. (TLRY) Registers a Bigger Fall Than the Market: Important Facts to Note",
+    "Stocks Are Getting Slammed Again. This Isn’t the Time to Panic.",
+    "US Equity Indexes in Broad-Based Retreat",
+    "US Equity Indexes Rise Amid Thin Volumes as Weak Economic Data Keeps Policy Easing Bets Elevated",
+    "Review & Preview: Rally Regrets",
+    "2 Crypto Stocks to Buy Hand Over First",
+    "Stock market news: Dow, S&P, Nasdaq slip; US big pharma deal with UK, and Bitcoin falters",
+    "ETFs to Benefit From Rate Cut Bets and Upbeat Forecasts",
+    "11 Stocks Turn $10,000 Into $392,513 In 11 Months",
+    "Dow Jones Futures: Apple, Broadcom, Nvidia, Shopify Are Big Movers; Credo, MongoDB Soar Late",
+    "Exchange-Traded Funds, Equity Futures Lower Pre-Bell Monday Ahead of Manufacturing Reports",
+    "AeroVironment (AVAV) Registers a Bigger Fall Than the Market: Important Facts to Note",
+    "Small caps are the 'best barometer' of US economic health",
+    "Meta Platforms - High EVA Shows Why The Premium Is There",
+    "Why Did Cardano Slide 7.2% Today?",
+    "Peter Schiff Says Michael Saylor Strategy-Bitcoin Model Is 'Fraud' And MSTR Is 'Broken'",
+    "Accenture (ACN) Rises As Market Takes a Dip: Key Facts",
+    "US Equity Indexes Break Five-Session Winning Streak Amid Thin Trading Volumes, Bitcoin Sell-Off",
+    "The Russell 2000 Is Riding Its Best 4-Day Stretch in a Year",
+    "Asian shares advance after a retreat on Wall Street",
+    "Why Did XRP Plummet 6.2% Today?",
+    "Battle of the S&P 500 ETFs: How VOO Compares to SPY on Fees, Yield, and Risk",
+    "Bitcoin and S&P 500 Year-End Bull Run Loading? Vol Metrics Say Yes"
+  ]
+}

@@ -1,0 +1,273 @@
+============================================================
+TS-CVA Forecasting Training
+============================================================
+Dataset: tech
+Run directory: training/tech__ts2vec_only_200ep_20251203_104547_20251203_104554
+============================================================
+
+Loading Yahoo Finance data...
+X_train: (78, 24, 10), y_train: (78, 8, 10)
+X_val: (11, 24, 10), y_val: (11, 8, 10)
+X_test: (23, 24, 10), y_test: (23, 8, 10)
+
+Sequence length: 24, Prediction length: 8, Features: 10
+
+Training TS-CVA representations...
+[NEW BEST] Epoch #0: train_loss=8.674817, val_loss=8.674817, time=0.82s, remaining=2.72min
+[NEW BEST] Epoch #1: train_loss=6.561841, val_loss=6.561841, time=0.18s, remaining=1.65min
+[NEW BEST] Epoch #2: train_loss=6.423897, val_loss=6.423897, time=0.26s, remaining=1.38min
+[NEW BEST] Epoch #3: train_loss=5.542537, val_loss=5.542537, time=0.22s, remaining=1.20min
+[NEW BEST] Epoch #4: train_loss=4.392842, val_loss=4.392842, time=0.12s, remaining=1.04min
+[NEW BEST] Epoch #5: train_loss=3.610540, val_loss=3.610540, time=0.22s, remaining=0.98min
+[NEW BEST] Epoch #6: train_loss=3.037002, val_loss=3.037002, time=0.20s, remaining=0.93min
+[NEW BEST] Epoch #7: train_loss=2.866692, val_loss=2.866692, time=0.14s, remaining=0.86min
+[NEW BEST] Epoch #8: train_loss=2.755358, val_loss=2.755358, time=0.18s, remaining=0.82min
+[NEW BEST] Epoch #9: train_loss=2.578647, val_loss=2.578647, time=0.22s, remaining=0.81min
+[NEW BEST] Epoch #10: train_loss=2.464222, val_loss=2.464222, time=0.19s, remaining=0.60min
+Epoch #11: train_loss=2.542990, val_loss=2.542990, time=0.12s, remaining=0.58min
+Epoch #12: train_loss=2.513270, val_loss=2.513270, time=0.13s, remaining=0.54min
+[NEW BEST] Epoch #13: train_loss=2.359681, val_loss=2.359681, time=0.17s, remaining=0.52min
+Epoch #14: train_loss=2.400942, val_loss=2.400942, time=0.18s, remaining=0.54min
+Epoch #15: train_loss=2.378158, val_loss=2.378158, time=0.13s, remaining=0.51min
+Epoch #16: train_loss=2.435862, val_loss=2.435862, time=0.16s, remaining=0.49min
+Epoch #17: train_loss=2.429627, val_loss=2.429627, time=0.12s, remaining=0.49min
+[NEW BEST] Epoch #18: train_loss=2.329178, val_loss=2.329178, time=0.14s, remaining=0.47min
+[NEW BEST] Epoch #19: train_loss=2.315065, val_loss=2.315065, time=0.16s, remaining=0.45min
+[NEW BEST] Epoch #20: train_loss=2.285578, val_loss=2.285578, time=0.14s, remaining=0.43min
+[NEW BEST] Epoch #21: train_loss=2.273591, val_loss=2.273591, time=0.12s, remaining=0.43min
+Epoch #22: train_loss=2.298376, val_loss=2.298376, time=0.12s, remaining=0.43min
+[NEW BEST] Epoch #23: train_loss=2.247965, val_loss=2.247965, time=0.14s, remaining=0.41min
+Epoch #24: train_loss=2.358622, val_loss=2.358622, time=0.11s, remaining=0.39min
+[NEW BEST] Epoch #25: train_loss=2.233205, val_loss=2.233205, time=0.12s, remaining=0.38min
+[NEW BEST] Epoch #26: train_loss=2.192284, val_loss=2.192284, time=0.14s, remaining=0.38min
+Epoch #27: train_loss=2.234941, val_loss=2.234941, time=0.11s, remaining=0.37min
+Epoch #28: train_loss=2.272179, val_loss=2.272179, time=0.17s, remaining=0.38min
+Epoch #29: train_loss=2.200113, val_loss=2.200113, time=0.10s, remaining=0.36min
+[NEW BEST] Epoch #30: train_loss=2.192144, val_loss=2.192144, time=0.11s, remaining=0.35min
+[NEW BEST] Epoch #31: train_loss=2.096916, val_loss=2.096916, time=0.14s, remaining=0.36min
+Epoch #32: train_loss=2.117964, val_loss=2.117964, time=0.12s, remaining=0.35min
+Epoch #33: train_loss=2.244622, val_loss=2.244622, time=0.12s, remaining=0.35min
+[NEW BEST] Epoch #34: train_loss=2.030194, val_loss=2.030194, time=0.11s, remaining=0.34min
+Epoch #35: train_loss=2.132947, val_loss=2.132947, time=0.13s, remaining=0.35min
+[NEW BEST] Epoch #36: train_loss=2.006949, val_loss=2.006949, time=0.13s, remaining=0.34min
+Epoch #37: train_loss=2.141047, val_loss=2.141047, time=0.12s, remaining=0.34min
+Epoch #38: train_loss=2.122215, val_loss=2.122215, time=0.13s, remaining=0.33min
+Epoch #39: train_loss=2.086642, val_loss=2.086642, time=0.12s, remaining=0.33min
+Epoch #40: train_loss=2.134169, val_loss=2.134169, time=0.12s, remaining=0.33min
+[NEW BEST] Epoch #41: train_loss=2.006929, val_loss=2.006929, time=0.13s, remaining=0.33min
+Epoch #42: train_loss=2.142015, val_loss=2.142015, time=0.13s, remaining=0.33min
+Epoch #43: train_loss=2.080143, val_loss=2.080143, time=0.12s, remaining=0.32min
+Epoch #44: train_loss=2.007132, val_loss=2.007132, time=0.11s, remaining=0.32min
+[NEW BEST] Epoch #45: train_loss=1.897240, val_loss=1.897240, time=0.13s, remaining=0.32min
+Epoch #46: train_loss=1.898527, val_loss=1.898527, time=0.12s, remaining=0.31min
+Epoch #47: train_loss=1.966011, val_loss=1.966011, time=0.12s, remaining=0.31min
+Epoch #48: train_loss=2.031321, val_loss=2.031321, time=0.13s, remaining=0.31min
+Epoch #49: train_loss=2.010298, val_loss=2.010298, time=0.12s, remaining=0.31min
+Epoch #50: train_loss=1.937633, val_loss=1.937633, time=0.12s, remaining=0.30min
+Epoch #51: train_loss=1.997019, val_loss=1.997019, time=0.12s, remaining=0.30min
+Epoch #52: train_loss=1.931020, val_loss=1.931020, time=0.11s, remaining=0.29min
+Epoch #53: train_loss=2.023436, val_loss=2.023436, time=0.10s, remaining=0.29min
+Epoch #54: train_loss=1.954533, val_loss=1.954533, time=0.12s, remaining=0.29min
+[NEW BEST] Epoch #55: train_loss=1.845236, val_loss=1.845236, time=0.12s, remaining=0.28min
+Epoch #56: train_loss=2.040376, val_loss=2.040376, time=0.10s, remaining=0.27min
+Epoch #57: train_loss=2.021018, val_loss=2.021018, time=0.11s, remaining=0.27min
+Epoch #58: train_loss=2.044757, val_loss=2.044757, time=0.11s, remaining=0.27min
+Epoch #59: train_loss=2.009781, val_loss=2.009781, time=0.12s, remaining=0.26min
+Epoch #60: train_loss=1.922171, val_loss=1.922171, time=0.11s, remaining=0.26min
+Epoch #61: train_loss=1.936784, val_loss=1.936784, time=0.10s, remaining=0.25min
+Epoch #62: train_loss=1.930966, val_loss=1.930966, time=0.11s, remaining=0.25min
+Epoch #63: train_loss=1.893526, val_loss=1.893526, time=0.11s, remaining=0.25min
+[NEW BEST] Epoch #64: train_loss=1.657554, val_loss=1.657554, time=0.13s, remaining=0.25min
+Epoch #65: train_loss=1.789059, val_loss=1.789059, time=0.12s, remaining=0.25min
+Epoch #66: train_loss=1.855169, val_loss=1.855169, time=0.13s, remaining=0.25min
+Epoch #67: train_loss=1.943281, val_loss=1.943281, time=0.13s, remaining=0.25min
+Epoch #68: train_loss=1.777167, val_loss=1.777167, time=0.13s, remaining=0.26min
+Epoch #69: train_loss=1.809228, val_loss=1.809228, time=0.13s, remaining=0.26min
+Epoch #70: train_loss=1.767541, val_loss=1.767541, time=0.11s, remaining=0.26min
+Epoch #71: train_loss=1.689423, val_loss=1.689423, time=0.11s, remaining=0.26min
+Epoch #72: train_loss=1.940319, val_loss=1.940319, time=0.10s, remaining=0.25min
+Epoch #73: train_loss=1.785458, val_loss=1.785458, time=0.11s, remaining=0.25min
+Epoch #74: train_loss=1.706064, val_loss=1.706064, time=0.12s, remaining=0.25min
+Epoch #75: train_loss=1.702978, val_loss=1.702978, time=0.13s, remaining=0.25min
+[NEW BEST] Epoch #76: train_loss=1.648731, val_loss=1.648731, time=0.13s, remaining=0.25min
+Epoch #77: train_loss=1.960277, val_loss=1.960277, time=0.11s, remaining=0.24min
+Epoch #78: train_loss=1.651119, val_loss=1.651119, time=0.12s, remaining=0.24min
+Epoch #79: train_loss=1.720354, val_loss=1.720354, time=0.11s, remaining=0.23min
+[NEW BEST] Epoch #80: train_loss=1.562014, val_loss=1.562014, time=0.13s, remaining=0.23min
+Epoch #81: train_loss=1.571802, val_loss=1.571802, time=0.15s, remaining=0.24min
+Epoch #82: train_loss=1.755222, val_loss=1.755222, time=0.11s, remaining=0.24min
+Epoch #83: train_loss=1.871993, val_loss=1.871993, time=0.16s, remaining=0.25min
+Epoch #84: train_loss=1.897654, val_loss=1.897654, time=0.13s, remaining=0.25min
+Epoch #85: train_loss=1.986101, val_loss=1.986101, time=0.11s, remaining=0.24min
+Epoch #86: train_loss=1.741126, val_loss=1.741126, time=0.12s, remaining=0.24min
+Epoch #87: train_loss=1.763440, val_loss=1.763440, time=0.12s, remaining=0.23min
+Epoch #88: train_loss=1.675406, val_loss=1.675406, time=0.12s, remaining=0.23min
+Epoch #89: train_loss=1.664933, val_loss=1.664933, time=0.12s, remaining=0.23min
+Epoch #90: train_loss=1.747112, val_loss=1.747112, time=0.12s, remaining=0.23min
+Epoch #91: train_loss=1.698630, val_loss=1.698630, time=0.12s, remaining=0.22min
+Epoch #92: train_loss=1.775863, val_loss=1.775863, time=0.10s, remaining=0.22min
+Epoch #93: train_loss=1.593872, val_loss=1.593872, time=0.13s, remaining=0.21min
+[NEW BEST] Epoch #94: train_loss=1.501110, val_loss=1.501110, time=0.13s, remaining=0.21min
+Epoch #95: train_loss=1.851092, val_loss=1.851092, time=0.11s, remaining=0.20min
+Epoch #96: train_loss=1.720068, val_loss=1.720068, time=0.12s, remaining=0.20min
+Epoch #97: train_loss=1.947987, val_loss=1.947987, time=0.10s, remaining=0.20min
+Epoch #98: train_loss=1.532747, val_loss=1.532747, time=0.13s, remaining=0.20min
+Epoch #99: train_loss=1.542054, val_loss=1.542054, time=0.12s, remaining=0.19min
+Epoch #100: train_loss=1.534027, val_loss=1.534027, time=0.12s, remaining=0.19min
+Epoch #101: train_loss=1.536099, val_loss=1.536099, time=0.13s, remaining=0.19min
+Epoch #102: train_loss=1.723009, val_loss=1.723009, time=0.11s, remaining=0.19min
+Epoch #103: train_loss=1.746671, val_loss=1.746671, time=0.11s, remaining=0.19min
+Epoch #104: train_loss=1.628542, val_loss=1.628542, time=0.11s, remaining=0.18min
+[NEW BEST] Epoch #105: train_loss=1.481903, val_loss=1.481903, time=0.13s, remaining=0.18min
+[NEW BEST] Epoch #106: train_loss=1.433989, val_loss=1.433989, time=0.13s, remaining=0.18min
+[NEW BEST] Epoch #107: train_loss=1.399906, val_loss=1.399906, time=0.13s, remaining=0.19min
+Epoch #108: train_loss=1.681658, val_loss=1.681658, time=0.12s, remaining=0.18min
+[NEW BEST] Epoch #109: train_loss=1.327367, val_loss=1.327367, time=0.14s, remaining=0.18min
+Epoch #110: train_loss=1.669088, val_loss=1.669088, time=0.11s, remaining=0.18min
+Epoch #111: train_loss=1.420099, val_loss=1.420099, time=0.13s, remaining=0.18min
+Epoch #112: train_loss=1.520697, val_loss=1.520697, time=0.12s, remaining=0.18min
+Epoch #113: train_loss=1.792584, val_loss=1.792584, time=0.11s, remaining=0.18min
+Epoch #114: train_loss=1.596686, val_loss=1.596686, time=0.11s, remaining=0.17min
+Epoch #115: train_loss=1.698500, val_loss=1.698500, time=0.11s, remaining=0.17min
+Epoch #116: train_loss=1.527853, val_loss=1.527853, time=0.12s, remaining=0.17min
+Epoch #117: train_loss=1.387769, val_loss=1.387769, time=0.12s, remaining=0.16min
+Epoch #118: train_loss=1.689621, val_loss=1.689621, time=0.10s, remaining=0.16min
+Epoch #119: train_loss=1.484544, val_loss=1.484544, time=0.12s, remaining=0.15min
+Epoch #120: train_loss=1.398802, val_loss=1.398802, time=0.13s, remaining=0.15min
+Epoch #121: train_loss=1.522899, val_loss=1.522899, time=0.11s, remaining=0.15min
+Epoch #122: train_loss=1.691334, val_loss=1.691334, time=0.11s, remaining=0.15min
+Epoch #123: train_loss=1.426645, val_loss=1.426645, time=0.12s, remaining=0.15min
+Epoch #124: train_loss=1.614635, val_loss=1.614635, time=0.12s, remaining=0.15min
+Epoch #125: train_loss=1.424456, val_loss=1.424456, time=0.12s, remaining=0.14min
+Epoch #126: train_loss=1.522926, val_loss=1.522926, time=0.11s, remaining=0.14min
+Epoch #127: train_loss=1.388315, val_loss=1.388315, time=0.12s, remaining=0.14min
+Epoch #128: train_loss=1.537263, val_loss=1.537263, time=0.11s, remaining=0.14min
+Epoch #129: train_loss=1.718940, val_loss=1.718940, time=0.09s, remaining=0.13min
+Epoch #130: train_loss=1.487202, val_loss=1.487202, time=0.11s, remaining=0.13min
+Epoch #131: train_loss=1.541491, val_loss=1.541491, time=0.12s, remaining=0.13min
+Epoch #132: train_loss=2.129526, val_loss=2.129526, time=0.10s, remaining=0.13min
+Epoch #133: train_loss=1.610102, val_loss=1.610102, time=0.12s, remaining=0.12min
+Epoch #134: train_loss=1.345605, val_loss=1.345605, time=0.13s, remaining=0.12min
+Epoch #135: train_loss=1.560449, val_loss=1.560449, time=0.13s, remaining=0.12min
+Epoch #136: train_loss=1.769885, val_loss=1.769885, time=0.10s, remaining=0.12min
+Epoch #137: train_loss=1.433766, val_loss=1.433766, time=0.12s, remaining=0.12min
+Epoch #138: train_loss=1.666243, val_loss=1.666243, time=0.11s, remaining=0.11min
+Epoch #139: train_loss=1.438035, val_loss=1.438035, time=0.11s, remaining=0.11min
+Epoch #140: train_loss=1.426770, val_loss=1.426770, time=0.12s, remaining=0.11min
+Epoch #141: train_loss=1.596564, val_loss=1.596564, time=0.10s, remaining=0.11min
+Epoch #142: train_loss=1.385481, val_loss=1.385481, time=0.12s, remaining=0.11min
+Epoch #143: train_loss=1.622236, val_loss=1.622236, time=0.11s, remaining=0.11min
+[NEW BEST] Epoch #144: train_loss=1.236524, val_loss=1.236524, time=0.14s, remaining=0.11min
+Epoch #145: train_loss=1.513495, val_loss=1.513495, time=0.13s, remaining=0.10min
+Epoch #146: train_loss=1.580439, val_loss=1.580439, time=0.12s, remaining=0.10min
+Epoch #147: train_loss=1.544970, val_loss=1.544970, time=0.12s, remaining=0.10min
+Epoch #148: train_loss=1.431672, val_loss=1.431672, time=0.11s, remaining=0.10min
+Epoch #149: train_loss=1.402523, val_loss=1.402523, time=0.12s, remaining=0.10min
+Epoch #150: train_loss=1.654480, val_loss=1.654480, time=0.10s, remaining=0.10min
+Epoch #151: train_loss=1.434485, val_loss=1.434485, time=0.12s, remaining=0.10min
+Epoch #152: train_loss=1.276690, val_loss=1.276690, time=0.13s, remaining=0.09min
+Epoch #153: train_loss=1.709877, val_loss=1.709877, time=0.12s, remaining=0.09min
+Epoch #154: train_loss=1.449689, val_loss=1.449689, time=0.12s, remaining=0.09min
+Epoch #155: train_loss=1.367814, val_loss=1.367814, time=0.12s, remaining=0.09min
+Epoch #156: train_loss=1.410786, val_loss=1.410786, time=0.12s, remaining=0.08min
+Epoch #157: train_loss=1.469869, val_loss=1.469869, time=0.12s, remaining=0.08min
+Epoch #158: train_loss=1.247984, val_loss=1.247984, time=0.12s, remaining=0.08min
+Epoch #159: train_loss=1.452389, val_loss=1.452389, time=0.12s, remaining=0.08min
+Epoch #160: train_loss=1.360939, val_loss=1.360939, time=0.12s, remaining=0.08min
+Epoch #161: train_loss=1.651299, val_loss=1.651299, time=0.10s, remaining=0.08min
+Epoch #162: train_loss=1.366932, val_loss=1.366932, time=0.11s, remaining=0.07min
+Epoch #163: train_loss=1.341537, val_loss=1.341537, time=0.11s, remaining=0.07min
+Epoch #164: train_loss=1.332340, val_loss=1.332340, time=0.12s, remaining=0.07min
+Epoch #165: train_loss=1.450141, val_loss=1.450141, time=0.10s, remaining=0.06min
+Epoch #166: train_loss=1.358256, val_loss=1.358256, time=0.12s, remaining=0.06min
+Epoch #167: train_loss=1.251847, val_loss=1.251847, time=0.12s, remaining=0.06min
+[NEW BEST] Epoch #168: train_loss=1.203723, val_loss=1.203723, time=0.13s, remaining=0.06min
+Epoch #169: train_loss=1.229649, val_loss=1.229649, time=0.14s, remaining=0.06min
+Epoch #170: train_loss=1.247417, val_loss=1.247417, time=0.12s, remaining=0.06min
+Epoch #171: train_loss=1.721480, val_loss=1.721480, time=0.11s, remaining=0.05min
+Epoch #172: train_loss=1.597600, val_loss=1.597600, time=0.11s, remaining=0.05min
+Epoch #173: train_loss=1.695180, val_loss=1.695180, time=0.10s, remaining=0.05min
+Epoch #174: train_loss=1.511278, val_loss=1.511278, time=0.11s, remaining=0.05min
+Epoch #175: train_loss=1.421878, val_loss=1.421878, time=0.11s, remaining=0.05min
+Epoch #176: train_loss=1.643957, val_loss=1.643957, time=0.10s, remaining=0.04min
+Epoch #177: train_loss=1.959617, val_loss=1.959617, time=0.10s, remaining=0.04min
+Epoch #178: train_loss=1.665388, val_loss=1.665388, time=0.11s, remaining=0.04min
+Epoch #179: train_loss=1.715062, val_loss=1.715062, time=0.12s, remaining=0.04min
+Epoch #180: train_loss=1.205628, val_loss=1.205628, time=0.12s, remaining=0.03min
+Epoch #181: train_loss=1.435313, val_loss=1.435313, time=0.11s, remaining=0.03min
+Epoch #182: train_loss=1.329757, val_loss=1.329757, time=0.12s, remaining=0.03min
+Epoch #183: train_loss=1.431926, val_loss=1.431926, time=0.11s, remaining=0.03min
+Epoch #184: train_loss=1.311010, val_loss=1.311010, time=0.13s, remaining=0.03min
+Epoch #185: train_loss=1.238251, val_loss=1.238251, time=0.12s, remaining=0.03min
+Epoch #186: train_loss=1.586370, val_loss=1.586370, time=0.11s, remaining=0.03min
+Epoch #187: train_loss=1.466093, val_loss=1.466093, time=0.10s, remaining=0.02min
+Epoch #188: train_loss=1.481022, val_loss=1.481022, time=0.11s, remaining=0.02min
+Epoch #189: train_loss=1.294488, val_loss=1.294488, time=0.11s, remaining=0.02min
+Epoch #190: train_loss=1.606915, val_loss=1.606915, time=0.11s, remaining=0.02min
+Epoch #191: train_loss=1.220536, val_loss=1.220536, time=0.12s, remaining=0.02min
+Epoch #192: train_loss=1.322106, val_loss=1.322106, time=0.11s, remaining=0.01min
+Epoch #193: train_loss=1.305306, val_loss=1.305306, time=0.12s, remaining=0.01min
+Epoch #194: train_loss=1.543528, val_loss=1.543528, time=0.11s, remaining=0.01min
+Epoch #195: train_loss=1.409318, val_loss=1.409318, time=0.11s, remaining=0.01min
+Epoch #196: train_loss=1.637455, val_loss=1.637455, time=0.11s, remaining=0.01min
+Epoch #197: train_loss=1.647456, val_loss=1.647456, time=0.11s, remaining=0.00min
+Epoch #198: train_loss=1.569684, val_loss=1.569684, time=0.11s, remaining=0.00min
+Epoch #199: train_loss=1.316117, val_loss=1.316117, time=0.12s, remaining=0.00min
+
+Representation learning time: 0:00:28
+
+Loading best model...
+Loaded best model from epoch 168 (val_loss=1.203723)
+Saved best model from epoch 168 (val_loss=1.203723)
+
+============================================================
+Training Forecasting Head
+============================================================
+Computing representations...
+Epoch 10/100: train_loss=0.064400, val_loss=0.990959
+Epoch 20/100: train_loss=0.042106, val_loss=0.947747
+Epoch 30/100: train_loss=0.036544, val_loss=0.893759
+Epoch 40/100: train_loss=0.030643, val_loss=0.862593
+Epoch 50/100: train_loss=0.027047, val_loss=0.833421
+Epoch 60/100: train_loss=0.025062, val_loss=0.840798
+Epoch 70/100: train_loss=0.023938, val_loss=0.833668
+Epoch 80/100: train_loss=0.022961, val_loss=0.829804
+Epoch 90/100: train_loss=0.021759, val_loss=0.832124
+Epoch 100/100: train_loss=0.022130, val_loss=0.830735
+
+Forecasting training time: 0:00:01
+
+============================================================
+Evaluation
+============================================================
+
+------------------------------------------------------------
+전체 성능 (Overall Performance)
+------------------------------------------------------------
+  RMSE (raw):          19.6266
+  MAE (raw):           15.4332
+  MAPE:                5.87%
+  Direction Accuracy:  60.87%
+
+  MSE (normalized):    1.960565
+  MAE (normalized):    1.221413
+
+------------------------------------------------------------
+종목별 성능 (Per-Symbol Performance)
+------------------------------------------------------------
+Symbol       MAPE        MAE       RMSE    Dir Acc
+------------------------------------------------------------
+AAPL        2.52%       7.08       7.58      60.9%
+MSFT       13.01%      27.92      28.73      34.8%
+GOOGL       2.31%       5.37       5.90      52.2%
+AMZN        3.91%       9.04       9.52      56.5%
+META       11.50%      36.60      36.77      52.2%
+NVDA        6.39%       2.59       3.23      56.5%
+AMD         4.39%      28.08      29.11      82.6%
+INTC        3.08%      15.00      15.64      73.9%
+CRM         3.04%       5.45       6.67      82.6%
+ORCL        8.53%      17.20      18.57      56.5%
+
+============================================================
+Finished!
+============================================================

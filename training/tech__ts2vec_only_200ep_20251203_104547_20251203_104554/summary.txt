@@ -1,0 +1,27 @@
+Dataset: tech
+Sequence length: 24
+Prediction length: 8
+Features: 10
+Cross-modal: False
+
+==================================================
+Overall Results:
+  RMSE (raw): 19.6266
+  MAE (raw): 15.4332
+  MAPE: 5.87%
+  Direction Accuracy: 60.87%
+  MSE (normalized): 1.960565
+  MAE (normalized): 1.221413
+
+==================================================
+Per-Symbol Results:
+  AAPL: MAPE=2.52%, MAE=7.08, Dir=60.9%
+  MSFT: MAPE=13.01%, MAE=27.92, Dir=34.8%
+  GOOGL: MAPE=2.31%, MAE=5.37, Dir=52.2%
+  AMZN: MAPE=3.91%, MAE=9.04, Dir=56.5%
+  META: MAPE=11.50%, MAE=36.60, Dir=52.2%
+  NVDA: MAPE=6.39%, MAE=2.59, Dir=56.5%
+  AMD: MAPE=4.39%, MAE=28.08, Dir=82.6%
+  INTC: MAPE=3.08%, MAE=15.00, Dir=73.9%
+  CRM: MAPE=3.04%, MAE=5.45, Dir=82.6%
+  ORCL: MAPE=8.53%, MAE=17.20, Dir=56.5%
